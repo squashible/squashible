@@ -1,0 +1,21 @@
+---
+
+  - name: Clean up zypper cache
+    command: zypper clean
+
+  - name: Really clean zypper cache
+    shell: for i in `ls /var/lib/zypp/`; do rm -rfv /var/lib/yum/${i}/*; done
+
+  - name: Determine kernel version in chroot
+    shell: ls /lib/modules/
+    register: kernel_version
+
+  - name: Generate module dependencies with depmod for kernel
+    shell: depmod -a {{ kernel_version.stdout }}
+
+  - name: Regenerate initramfs using dracut
+    shell: dracut --force --regenerate-all
+
+#  - name: Apply default SELinux contexts to the system
+#    shell: restorecon -R /
+#    when: selinux_enabled

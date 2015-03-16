@@ -1,0 +1,67 @@
+---
+
+  - name: Upgrade and install minimum package set
+    shell: "{{item}}"
+    with_items:
+      - zypper -n update
+      - zypper -n install {{ minimal_packages['Suse'] | join (" ") }}
+
+#  - name: Install SELinux packages
+#    shell: yum -y install {{ selinux_packages['Suse'] | join (" ") }}
+#    when: selinux_enabled
+
+#  - name: Set multi-user target as the default systemd target
+#    file: src=/lib/systemd/system/multi-user.target dest={{item}}
+#      state=link force=yes
+#    with_items:
+#      - /lib/systemd/system/default.target
+#      - /etc/systemd/system/default.target
+
+  - name: Copy /etc/skel into /root
+    shell: rsync -av /etc/skel/ /root/
+
+  - name: Store journald logs only in RAM
+    lineinfile: dest=/etc/systemd/journald.conf line="Storage=volatile" state=present
+
+  - name: Add live user (for testing)
+    user: name=live shell=/bin/bash groups=wheel append=yes
+      password="$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
+
+  - name: Deny live user from ssh, only allow via console
+    lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
+
+  - name: Enable logrotate compression
+    lineinfile: dest=/etc/logrotate.conf
+        regexp="^compress"
+        insertafter="^#compress"
+        line="compress"
+        state=present
+
+  - name: Enable daily log rotation
+    lineinfile: dest=/etc/logrotate.conf
+        regexp="^weekly"
+        line="daily"
+        backrefs=yes
+        state=present
+
+  - name: Add dracut config to enable livenet module
+    copy: src=redhat/wisp-dracut-config dest=/etc/dracut.conf.d/wisp.conf
+      owner=root group=root mode=0644
+
+  - name: Add dracut live filesystem boot patch
+    copy: src=redhat/0001-Testing-live-fileystem-boot.patch dest=/tmp/0001-Testing-live-fileystem-boot.patch
+
+  - name: Apply dracut live filesystem boot patch
+    command: patch -p0 /usr/lib/dracut/modules.d/90dmsquash-live/dmsquash-live-root.sh /tmp/0001-Testing-live-fileystem-boot.patch
+
+  - name: Remove live filesystem boot patch
+    file: path=/tmp/0001-Testing-live-fileystem-boot.patch state=absent
+
+  - name: Add dracut torrent retrieval patch
+    copy: src=redhat/0002-Testing-torrent-retrieval.patch dest=/tmp/0002-Testing-torrent-retrieval.patch
+
+  - name: Apply dracut torrent retrieval patch
+    command: patch -p0 /usr/lib/dracut/modules.d/45url-lib/url-lib.sh /tmp/0002-Testing-torrent-retrieval.patch
+
+  - name: Remove torrent retrieval patch
+    file: path=/tmp/0002-Testing-torrent-retrieval.patch state=absent

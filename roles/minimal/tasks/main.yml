@@ -24,3 +24,6 @@
 
   - include: redhat.yml
     when: ansible_os_family == "RedHat"
+
+  - include: suse.yml
+    when: ansible_os_family == "Suse"

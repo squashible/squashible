@@ -31,6 +31,14 @@
       - "{{builder_required_packages[ansible_os_family]}}"
     when: ansible_os_family == "Debian"
 
+  - name: Install packages on builder node (Suse)
+    zypper: >
+      pkg={{item}}
+      state=present
+    with_items:
+      - "{{builder_required_packages[ansible_os_family]}}"
+    when: ansible_os_family == "Suse"
+
   # NOTE(major): Docker on Fedora/CentOS 7 uses socket activation with systemd,
   # so this check should always show Docker as being up as long as the docker
   # package is installed.

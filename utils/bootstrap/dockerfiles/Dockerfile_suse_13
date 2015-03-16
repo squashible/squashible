@@ -1,0 +1,10 @@
+FROM opensuse:13.2
+MAINTAINER Antony Messerli <amesserl@rackspace.com>
+
+# Add a directory to hold our chroot
+RUN mkdir /tmp/bootstrap
+
+# Add Repositories
+RUN zypper --root /tmp/bootstrap ar http://mirror.rackspace.com/opensuse/distribution/13.2/repo/oss/ repo-oss
+
+CMD ["zypper", "-n", "--gpg-auto-import-keys", "--root", "/tmp/bootstrap", "install", "rpm", "zypper", "wget", "vim", "systemd"]

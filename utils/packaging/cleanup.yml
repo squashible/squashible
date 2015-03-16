@@ -6,6 +6,9 @@
   - include: cleanup_redhat.yml
     when: ansible_os_family == "RedHat"
 
+  - include: cleanup_suse.yml
+    when: ansible_os_family == "Suse"
+
   - name: Unmount filesystems left over from a failed build
     mount: >
       name={{item.dest}}

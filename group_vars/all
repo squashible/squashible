@@ -23,6 +23,7 @@ supported_builder_os:
   - fedora_20
   - fedora_21
   - rhel_7
+  - suse_13
 
 # Supported live operating systems.  Add to this list once you've written the
 # necessary playbooks, tasks and variables to support new operating systems 
@@ -32,6 +33,7 @@ supported_live_os:
   - debian_jessie/sid
   - fedora_20
   - fedora_21
+  - suse_13
 
 # Builder systems must have these packages installed.
 builder_required_packages:
@@ -45,4 +47,9 @@ builder_required_packages:
     - docker.io
     - python-docker
     - squashfs-tools
+    - uuid
+  Suse:
+    - docker
+    - python-docker-py
+    - squashfs
     - uuid

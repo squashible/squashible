@@ -25,3 +25,7 @@
 
   - include: packaging_redhat.yml
     when: hostvars[chrootpath]['ansible_os_family'] == "RedHat"
+
+  - include: packaging_suse.yml
+    when: hostvars[chrootpath]['ansible_os_family'] == "Suse"
+

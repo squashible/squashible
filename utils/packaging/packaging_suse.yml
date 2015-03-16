@@ -1,0 +1,18 @@
+---
+
+  - name: Create temporary mount point
+    file: dest=temp state=directory
+
+  - name: Prepare a sparse file
+    shell: "{{ item }}"
+    with_items:
+      - fallocate -l 2G rootfs.img
+      - mkfs.btrfs rootfs.img
+      - mount -t btrfs -o compress=lzo rootfs.img temp
+      - rsync -a --xattrs {{ chrootpath }}/ temp/
+      - umount temp
+      - tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img
+      - mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img
+
+  - name: Remove temporary directory
+    file: dest=temp state=absent
