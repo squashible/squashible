@@ -5,11 +5,13 @@ minimal_packages:
     - btrfs-progs
     - ctorrent
     - dracut
+    - dracut-live
     - dracut-tools
     - dracut-network
     - dracut-config-generic
     - kernel
     - logrotate
+    - nfs-utils
     - openssh-clients
     - openssh-server
     - patch

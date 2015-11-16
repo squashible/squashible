@@ -16,7 +16,7 @@
     when: live_os == 'debian_jessie/sid'
 
   - name: Install packages on builder node (Red Hat)
-    yum: >
+    dnf: >
       pkg={{item}}
       state=present
     with_items:

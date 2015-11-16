@@ -17,6 +17,7 @@
     with_items:
       - { fstype: "proc",       src: "none",        dest: "proc" }
       - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "sys/fs/selinux" }
+      - { fstype: "none",       src: "none",        dest: "dev" }
 
   - name: Clean up the chroot path
     file: >

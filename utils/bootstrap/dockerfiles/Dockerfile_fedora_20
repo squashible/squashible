@@ -1,8 +1,0 @@
-FROM fedora:20
-MAINTAINER Major Hayden <major.hayden@rackspace.com>
-
-# Add a directory to hold our chroot
-RUN mkdir /tmp/bootstrap
-
-# Build the chroot as soon as the docker container starts
-CMD ["yum", "install", "-y", "--installroot=/tmp/bootstrap", "--releasever=20", "--nogpg", "systemd", "passwd", "yum", "fedora-release", "vim-minimal", "openssh-server", "procps-ng"]

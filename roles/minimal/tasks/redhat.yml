@@ -3,11 +3,11 @@
   - name: Upgrade and install minimum package set
     shell: "{{item}}"
     with_items:
-      - yum -y upgrade
-      - yum -y install {{ minimal_packages['RedHat'] | join (" ") }}
+      - dnf -y upgrade
+      - dnf -y install {{ minimal_packages['RedHat'] | join (" ") }}
 
   - name: Install SELinux packages
-    shell: yum -y install {{ selinux_packages['RedHat'] | join (" ") }}
+    shell: dnf -y install {{ selinux_packages['RedHat'] | join (" ") }}
     when: selinux_enabled
 
   - name: Set multi-user target as the default systemd target
@@ -47,21 +47,3 @@
   - name: Add dracut config to enable livenet module
     copy: src=redhat/wisp-dracut-config dest=/etc/dracut.conf.d/wisp.conf
       owner=root group=root mode=0644
-
-  - name: Add dracut live filesystem boot patch
-    copy: src=redhat/0001-Testing-live-fileystem-boot.patch dest=/tmp/0001-Testing-live-fileystem-boot.patch
-
-  - name: Apply dracut live filesystem boot patch
-    command: patch -p0 /usr/lib/dracut/modules.d/90dmsquash-live/dmsquash-live-root.sh /tmp/0001-Testing-live-fileystem-boot.patch
-
-  - name: Remove live filesystem boot patch
-    file: path=/tmp/0001-Testing-live-fileystem-boot.patch state=absent
-
-  - name: Add dracut torrent retrieval patch
-    copy: src=redhat/0002-Testing-torrent-retrieval.patch dest=/tmp/0002-Testing-torrent-retrieval.patch
-
-  - name: Apply dracut torrent retrieval patch
-    command: patch -p0 /usr/lib/dracut/modules.d/45url-lib/url-lib.sh /tmp/0002-Testing-torrent-retrieval.patch
-
-  - name: Remove torrent retrieval patch
-    file: path=/tmp/0002-Testing-torrent-retrieval.patch state=absent

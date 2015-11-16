@@ -44,3 +44,11 @@
 
   - name: Move the docker filesystem into the root of the chroot path
     shell: mv {{chrootpath}}/bootstrap/* {{chrootpath}}
+
+  - name: Mount dev inside the chroot
+    mount: >
+        name={{chrootpath}}/dev
+        opts=bind
+        fstype=none
+        src=/dev
+        state=mounted

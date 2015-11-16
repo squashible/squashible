@@ -1,10 +1,10 @@
 ---
 
   - name: Clean up yum cache
-    command: yum clean all
+    command: dnf clean all
 
   - name: Really clean yum cache
-    shell: for i in `ls /var/lib/yum/`; do rm -rfv /var/lib/yum/${i}/*; done
+    shell: for i in `ls /var/lib/dnf/`; do rm -rfv /var/lib/dnf/${i}/*; done
 
   - name: Determine kernel version in chroot
     shell: ls /lib/modules/
