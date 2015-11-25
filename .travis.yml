@@ -1,10 +1,12 @@
 sudo: true
+language: python
+
 before_install:
 - sudo apt-get update -qq
-- sudo apt-get install -qq ansible
-
+install:
+  - pip install ansible
+  - pip install docker-py
 services:
   - docker
-
 script:
 - ./run_squashible.sh

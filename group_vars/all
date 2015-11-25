@@ -22,6 +22,7 @@ supported_builder_os:
   - fedora_23
   - rhel_7
   - suse_13
+  - ubuntu_14
 
 # Supported live operating systems.  Add to this list once you've written the
 # necessary playbooks, tasks and variables to support new operating systems 
@@ -42,7 +43,7 @@ builder_required_packages:
     - uuid
   Debian:
     - docker.io
-    - python-docker
+#    - python-docker
     - squashfs-tools
     - uuid
   Suse:
