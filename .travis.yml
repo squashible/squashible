@@ -1,0 +1,7 @@
+sudo: true
+
+services:
+  - docker
+
+script:
+- ./run_squashible.sh
