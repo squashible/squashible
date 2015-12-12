@@ -9,8 +9,8 @@ before_install:
  - sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl
 
 install:
- - pip install ansible
- - pip install docker-py
+ - sudo pip install ansible
+ - sudo pip install docker-py
 
 script:
- - ./run_squashible.sh
+ - sudo /run_squashible.sh
