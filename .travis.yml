@@ -6,7 +6,7 @@ dist: trusty
 
 before_install:
  - sudo apt-get update -qq
- - sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl
+ - sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl btrfs-tools
 
 install:
  - sudo pip install ansible
