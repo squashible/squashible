@@ -7,7 +7,6 @@ dist: trusty
 before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl docker.io
- - sudo service docker start
 
 install:
  - pip install ansible
