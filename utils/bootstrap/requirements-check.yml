@@ -32,6 +32,9 @@
     when: ansible_os_family == "Debian"
     ignore_errors: true
 
+  - include: travis_docker_install.yml
+    when: ansible_os_family == "Debian"
+
   - name: Install packages on builder node (Suse)
     zypper: >
       pkg={{item}}
