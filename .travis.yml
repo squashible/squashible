@@ -13,4 +13,4 @@ install:
  - sudo pip install docker-py
 
 script:
- - sudo /run_squashible.sh
+ - sudo ./run_squashible.sh
