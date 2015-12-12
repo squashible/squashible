@@ -13,8 +13,5 @@ install:
  - pip install ansible
  - pip install docker-py
 
-services:
- - docker
-
 script:
  - ./run_squashible.sh
