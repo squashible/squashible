@@ -3,6 +3,8 @@ language: python
 
 before_install:
 - sudo apt-get update -qq
+- sudo apt-get -y install squashfs-tools uuid
+
 install:
   - pip install ansible
   - pip install docker-py

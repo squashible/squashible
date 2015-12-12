@@ -30,6 +30,7 @@
     with_items:
       - "{{builder_required_packages[ansible_os_family]}}"
     when: ansible_os_family == "Debian"
+    ignore_errors: true
 
   - name: Install packages on builder node (Suse)
     zypper: >
