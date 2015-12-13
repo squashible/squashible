@@ -1,10 +1,10 @@
 ---
 
   - name: Clean up yum cache
-    command: dnf clean all
+    command: "{{ ansible_pkg_mgr }} clean all"
 
   - name: Really clean yum cache
-    shell: for i in `ls /var/lib/dnf/`; do rm -rfv /var/lib/dnf/${i}/*; done
+    shell: for i in `ls /var/lib/{{ ansible_pkg_mgr }}/`; do rm -rfv /var/lib/{{ ansible_pkg_mgr }}/${i}/*; done
 
   - name: Determine kernel version in chroot
     shell: ls /lib/modules/
