@@ -3,11 +3,11 @@
   - name: Upgrade and install minimum package set
     shell: "{{item}}"
     with_items:
-      - dnf -y upgrade
-      - dnf -y install {{ minimal_packages['RedHat'] | join (" ") }}
+      - {{ ansible_pkg_mgr }} -y upgrade
+      - {{ ansible_pkg_mgr}} -y install {{ minimal_packages['RedHat'] | join (" ") }}
 
   - name: Install SELinux packages
-    shell: dnf -y install {{ selinux_packages['RedHat'] | join (" ") }}
+    shell: {{ ansible_pkg_mgr }} -y install {{ selinux_packages['RedHat'] | join (" ") }}
     when: selinux_enabled
 
   - name: Set multi-user target as the default systemd target
