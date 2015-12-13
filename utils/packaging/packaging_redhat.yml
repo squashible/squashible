@@ -7,8 +7,8 @@
     shell: "{{ item }}"
     with_items:
       - fallocate -l 2G rootfs.img
-      - mkfs.btrfs rootfs.img
-      - mount -t btrfs -o compress=lzo rootfs.img temp
+      - mkfs.ext4 -F rootfs.img
+      - mount -t ext4 rootfs.img temp
       - rsync -a --xattrs {{ chrootpath }}/ temp/
       - umount temp
       - tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img
