@@ -1,10 +1,10 @@
 ---
 
   - name: Upgrade and install minimum package set
-    shell: "{{ ansible_pkg_mgr }} {{item}}"
+    shell: "{{ ansible_pkg_mgr }} -y {{item}}"
     with_items:
-      - "-y upgrade"
-      - "-y install {{ minimal_packages['RedHat'] | join (" ") }}"
+      - upgrade
+      - install {{ minimal_packages['RedHat'] | join (" ") }}
 
   - name: Install SELinux packages
     shell: "{{ ansible_pkg_mgr }} -y install {{ selinux_packages['RedHat'] | join (" ") }}"
