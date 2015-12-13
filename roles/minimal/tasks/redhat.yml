@@ -1,10 +1,12 @@
 ---
 
   - name: Set minimal_packages
-    set_fact: minimal_packages={{ minimal_packages['RedHat'] | join (",") }}
+    set_fact: 
+      minimal_packages: "{{ minimal_packages['RedHat'] | join (' ') }}"
 
   - name: Set selinux_packages
-    set_fact: selinux_packages={{ selinux_packages['RedHat'] | join (",") }}
+    set_fact: 
+      selinux_packages: "{{ selinux_packages['RedHat'] | join (' ') }}"
 
   - name: Install minimum package set
     shell: "{{ ansible_pkg_mgr }} -y install {{ minimal_packages }}"
