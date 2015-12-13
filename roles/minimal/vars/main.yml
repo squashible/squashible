@@ -55,4 +55,4 @@ selinux_packages:
   Debian:
     - auditd
     - selinux-basics
-    - selinux-policy-default
+    - selinux-utils
