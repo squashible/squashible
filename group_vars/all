@@ -7,7 +7,7 @@ outputpath: live_output
 
 # Which live OS should be build?  Refer to "supported_live_os" variable below
 # for supported OS versions.
-live_os: fedora_23
+live_os:
 
 # Should we build live environments with SELinux enabled and proper contexts
 # applied?
