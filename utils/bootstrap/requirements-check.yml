@@ -9,12 +9,6 @@
       that:
         - "'{{live_os}}' in supported_live_os"
 
-  # NOTE(major): Using "jessie/sid" causes problems later since / is used for
-  # directory paths. Sigh.
-  - name: Rename debian_jessie/sid to debian_jessie
-    set_fact: live_os=debian_jessie
-    when: live_os == 'debian_jessie/sid'
-
   - name: Install packages on builder node (Red Hat)
     dnf: >
       pkg={{item}}
