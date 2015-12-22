@@ -49,6 +49,20 @@
         backrefs=yes
         state=present
 
+  - name: Copy test livenet patches for bugzilla #1280103
+    copy:
+      src: redhat/dracut/livenet-generator.sh
+      dest: /usr/lib/dracut/modules.d/90livenet/livenet-generator.sh
+      mode: 0755
+    when: ansible_distribution == 'Fedora' and ansible_distribution_version == "23"
+
+  - name: Copy test livenet patches for bugzilla #1280103
+    copy:
+      src: redhat/dracut/module-setup.sh
+      dest: /usr/lib/dracut/modules.d/90livenet/module-setup.sh
+      mode: 0755
+    when: ansible_distribution == 'Fedora' and ansible_distribution_version == "23"
+
   - name: Add dracut config to enable livenet module
     copy: src=redhat/wisp-dracut-config dest=/etc/dracut.conf.d/wisp.conf
       owner=root group=root mode=0644
