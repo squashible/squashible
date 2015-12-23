@@ -21,7 +21,7 @@ supported_builder_os:
   - debian_jessie
   - fedora_23
   - rhel_7
-  - suse_13
+  - suse_42
   - ubuntu_14
 
 # Supported live operating systems.  Add to this list once you've written the
@@ -31,7 +31,8 @@ supported_live_os:
   - centos_7
   - debian_jessie
   - fedora_23
-  - suse_13
+  - suse_42
+  - ubuntu_trusty
 
 # Builder systems must have these packages installed.
 builder_required_packages:
@@ -51,3 +52,8 @@ builder_required_packages:
     - python-docker-py
     - squashfs
     - uuid
+
+# public keys to inject into authorized_keys
+user_ssh_keys:
+- key1
+- key2
