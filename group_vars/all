@@ -17,11 +17,7 @@ selinux_enabled: yes
 # you've written the necessary playbooks, tasks and variables to support new
 # operating systems as builders.
 supported_builder_os:
-  - centos_7
-  - debian_jessie
   - fedora_23
-  - rhel_7
-  - suse_42
   - ubuntu_14
 
 # Supported live operating systems.  Add to this list once you've written the
@@ -29,10 +25,10 @@ supported_builder_os:
 # as live operating systems.
 supported_live_os:
   - centos_7
-  - debian_jessie
+  - debian_8
   - fedora_23
   - suse_42
-  - ubuntu_trusty
+  - ubuntu_15.10
 
 # Builder systems must have these packages installed.
 builder_required_packages:

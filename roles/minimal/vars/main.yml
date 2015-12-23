@@ -36,7 +36,9 @@ minimal_packages:
     - sudo
     - wget
   Suse:
+    - arping2
     - binutils
+    - curl
     - dracut
     - kernel-default
     - logrotate
@@ -46,6 +48,16 @@ minimal_packages:
     - squashfs
     - sudo
     - tar
+    - wget
+  Ubuntu:
+    - apt-utils
+    - live-build
+    - logrotate
+    - openssh-client
+    - openssh-server
+    - rsync
+    - squashfs-tools
+    - sudo
     - wget
 
 selinux_packages:

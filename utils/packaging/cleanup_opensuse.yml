@@ -4,7 +4,7 @@
     command: zypper clean
 
   - name: Really clean zypper cache
-    shell: for i in `ls /var/lib/zypp/`; do rm -rfv /var/lib/yum/${i}/*; done
+    shell: for i in `ls /var/lib/zypp/`; do rm -rfv /var/lib/zypp/${i}/*; done
 
   - name: Determine kernel version in chroot
     shell: ls /lib/modules/

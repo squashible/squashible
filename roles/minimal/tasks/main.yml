@@ -1,5 +1,8 @@
 ---
 
+  - name: Dump all vars
+    action: template src=dumpall.j2 dest=/tmp/ansible.all
+
   - name: Set /etc/resolv.conf
     lineinfile: >
         dest=/etc/resolv.conf
@@ -20,10 +23,13 @@
   - include: mounts.yml
 
   - include: debian.yml
-    when: ansible_os_family == 'Debian'
+    when: ansible_distribution == 'Debian'
 
   - include: redhat.yml
     when: ansible_os_family == "RedHat"
 
-  - include: suse.yml
-    when: ansible_os_family == "Suse"
+  - include: opensuse.yml
+    when: ansible_os_family == "openSUSE Leap"
+ 
+  - include: ubuntu.yml
+    when: ansible_distribution == "Ubuntu"

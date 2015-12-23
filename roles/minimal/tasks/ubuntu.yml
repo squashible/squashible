@@ -1,0 +1,44 @@
+---
+
+  - name: Disable daemon startup with policy-rc.d file
+    copy: src=debian/usr-sbin-policy-rc.d dest=/usr/sbin/policy-rc.d
+      owner=root group=root mode=0755
+
+  - name: Upgrade all packages in chroot
+    apt: update_cache=yes upgrade=dist
+
+  - name: Convert to systemd
+    apt: pkg={{ item }} state=latest
+    with_items:
+    - systemd
+    - systemd-sysv
+
+  - name: Install minimal packages
+    apt: pkg={{item}} state=latest
+    with_items:
+      - "{{ minimal_packages['Ubuntu'] }}"
+
+  - name: Add support for DNS resolution in initramfs
+    lineinfile: >
+      dest=/etc/live/boot.conf
+      line="LIVE_DNS=true"
+      create=yes
+      state=present
+
+  - name: Remove hostname file, let live-config take care of it
+    file: path=/etc/hostname state=absent
+
+  - name: Install the kernel and regenerate initramfs
+    apt: pkg=linux-generic state=latest
+
+  - name: Don't let live-config disable ssh password authentication
+    lineinfile: dest=/lib/live/config/1160-openssh-server
+        regexp="PasswordAuthentication"
+        state=absent
+
+  - name: Add live user (for testing)
+    user: name=live shell=/bin/bash groups=sudo append=yes
+      password="$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
+
+  - name: Deny live user from ssh, only allow via console
+    lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"

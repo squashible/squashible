@@ -1,11 +1,7 @@
 ---
 
   - name: Mount proc inside the chroot
-    mount: >
-        name=/proc
-        fstype=proc
-        src=none
-        state=present
+    command: mount -t proc none /proc
 
   - name: Ensure /sys/fs/selinux mount path exists
     file: >

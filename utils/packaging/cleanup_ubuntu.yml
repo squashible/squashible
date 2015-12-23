@@ -1,0 +1,10 @@
+---
+
+  - name: Clean apt cache
+    command: apt-get -y clean
+
+  - name: Remove apt lists
+    command: rm -rf /var/lib/apt/lists/*
+
+  - name: One last generation of the initramfs
+    command: update-initramfs -u

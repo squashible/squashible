@@ -7,4 +7,4 @@ RUN mkdir /tmp/bootstrap
 # Add Repositories
 RUN zypper --root /tmp/bootstrap ar http://mirror.rackspace.com/opensuse/distribution/leap/42.1/repo/oss/ repo-oss
 
-CMD ["zypper", "-n", "--gpg-auto-import-keys", "--root", "/tmp/bootstrap", "install", "rpm", "zypper", "wget", "vim", "systemd"]
+CMD ["zypper", "-n", "--gpg-auto-import-keys", "--root", "/tmp/bootstrap", "install", "rpm", "zypper", "wget", "vim", "systemd", "python"]

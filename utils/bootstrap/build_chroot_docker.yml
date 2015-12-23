@@ -46,9 +46,4 @@
     shell: mv {{chrootpath}}/bootstrap/* {{chrootpath}}
 
   - name: Mount dev inside the chroot
-    mount: >
-        name={{chrootpath}}/dev
-        opts=bind
-        fstype=none
-        src=/dev
-        state=mounted
+    shell: mount -o bind /dev {{chrootpath}}/dev
