@@ -27,7 +27,7 @@ supported_live_os:
   - centos_7
   - debian_8
   - fedora_23
-  - suse_42
+  - opensuse_42.1
   - ubuntu_15.10
 
 # Builder systems must have these packages installed.
