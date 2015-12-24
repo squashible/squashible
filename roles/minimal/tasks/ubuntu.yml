@@ -50,5 +50,5 @@
     lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
 
   - name: Add dracut config to enable livenet module
-    copy: src=ubuntu/wisp-dracut-config dest=/etc/dracut.conf
+    copy: src=ubuntu/dracut-config dest=/etc/dracut.conf
       owner=root group=root mode=0644
