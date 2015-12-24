@@ -52,3 +52,17 @@
   - name: Add dracut config to enable livenet module
     copy: src=ubuntu/dracut-config dest=/etc/dracut.conf
       owner=root group=root mode=0644
+
+  - name: Copy test livenet patches for bugzilla #1280103
+    copy:
+      src: ubuntu/dracut/livenet-generator.sh
+      dest: /usr/lib/dracut/modules.d/90livenet/livenet-generator.sh
+      mode: 0755
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
+
+  - name: Copy test livenet patches for bugzilla #1280103
+    copy:
+      src: ubuntu/dracut/module-setup.sh
+      dest: /usr/lib/dracut/modules.d/90livenet/module-setup.sh
+      mode: 0755
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
