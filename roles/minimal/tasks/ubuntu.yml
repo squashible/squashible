@@ -4,8 +4,11 @@
     copy: src=debian/usr-sbin-policy-rc.d dest=/usr/sbin/policy-rc.d
       owner=root group=root mode=0755
 
-  - name: Set repo name to universe to pull in some live-boot packages
-    apt_repository: repo='deb http://mirror.rackspace.com/ubuntu {{ ansible_distribution_release }} main universe' state=present
+#  - name: Set repo name to universe to pull in some live-boot packages
+#    apt_repository: repo='deb http://mirror.rackspace.com/ubuntu {{ ansible_distribution_release }} main universe' state=present
+
+  - name: Add ppa for dracut to fix some conflicts https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1109029 
+    apt_repository: repo='deb http://ppa.launchpad.net/morty/dracut-release/ubuntu {{ ansible_distribution_release }} main' state=present
 
   - name: Upgrade all packages in chroot
     apt: update_cache=yes upgrade=dist
@@ -17,7 +20,7 @@
     - systemd-sysv
 
   - name: Install minimal packages
-    apt: pkg={{item}} state=latest
+    apt: pkg={{item}} state=latest force=yes
     with_items:
       - "{{ minimal_packages['Ubuntu'] }}"
 
@@ -45,3 +48,7 @@
 
   - name: Deny live user from ssh, only allow via console
     lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
+
+  - name: Add dracut config to enable livenet module
+    copy: src=ubuntu/wisp-dracut-config dest=/etc/dracut.conf.d/wisp.conf
+      owner=root group=root mode=0644
