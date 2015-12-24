@@ -40,6 +40,7 @@ minimal_packages:
     - binutils
     - curl
     - dracut
+    - hostname
     - kernel-default
     - logrotate
     - openssh
