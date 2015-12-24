@@ -21,10 +21,13 @@
       - cp {{ initrd_path['stdout'] }} {{ outputpath }}/initrd.img
 
   - include: packaging_debian.yml
-    when: hostvars[chrootpath]['ansible_os_family'] == "Debian"
+    when: when: hostvars[chrootpath]['ansible_distribution'] == "Debian"
 
   - include: packaging_redhat.yml
     when: hostvars[chrootpath]['ansible_os_family'] == "RedHat"
 
   - include: packaging_opensuse.yml
     when: hostvars[chrootpath]['ansible_os_family'] == "openSUSE Leap"
+
+  - include: packaging_ubuntu.yml
+    when: hostvars[chrootpath]['ansible_distribution'] == "Ubuntu"
