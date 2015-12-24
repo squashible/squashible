@@ -51,6 +51,9 @@ minimal_packages:
     - wget
   Ubuntu:
     - apt-utils
+    - casper
+    - live-boot
+    - live-boot-initramfs-tools
     - live-build
     - logrotate
     - openssh-client

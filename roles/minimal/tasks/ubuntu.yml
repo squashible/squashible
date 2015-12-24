@@ -4,6 +4,9 @@
     copy: src=debian/usr-sbin-policy-rc.d dest=/usr/sbin/policy-rc.d
       owner=root group=root mode=0755
 
+  - name: Set repo name to universe to pull in some live-boot packages
+    apt_repository: repo='deb http://mirror.rackspace.com/ubuntu {{ ansible_distribution_release }} main universe' state=present
+
   - name: Upgrade all packages in chroot
     apt: update_cache=yes upgrade=dist
 
