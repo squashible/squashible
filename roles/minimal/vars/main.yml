@@ -23,11 +23,9 @@ minimal_packages:
   Debian:
     - apt-utils
     - ctorrent
+    - dracut
+    - dracut-network
     - libpath-class-file-stat-perl
-    - live-boot
-    - live-boot-initramfs-tools
-    - live-config
-    - live-config-systemd
     - logrotate
     - openssh-client
     - openssh-server

@@ -7,4 +7,4 @@
     command: rm -rf /var/lib/apt/lists/*
 
   - name: Regenerate initramfs using dracut
-    shell: dracut --force --regenerate-all
+    command: dracut --force --regenerate-all
