@@ -24,6 +24,9 @@
     with_items:
       - "{{ minimal_packages['Debian'] }}"
 
+  - name: Remove hostname file, let live-config take care of it
+    file: path=/etc/hostname state=absent
+
   - name: Install the kernel and regenerate initramfs
     apt: pkg=linux-image-amd64 state=latest
 
