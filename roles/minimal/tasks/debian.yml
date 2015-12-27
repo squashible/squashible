@@ -24,34 +24,8 @@
     with_items:
       - "{{ minimal_packages['Debian'] }}"
 
-  - name: Add support for DNS resolution in initramfs
-    lineinfile: >
-      dest=/etc/live/boot.conf
-      line="LIVE_DNS=true"
-      create=yes
-      state=present
-
-  - name: Remove hostname file, let live-config take care of it
-    file: path=/etc/hostname state=absent
-
-  - name: Install modified live-boot-initramfs-tools for ctorrent
-    copy: src=debian/usr_share_initramfs-tools_hooks_live dest=/usr/share/initramfs-tools/hooks/live
-
   - name: Install the kernel and regenerate initramfs
     apt: pkg=linux-image-amd64 state=latest
-
-  - name: Add support to live-boot to obtain torrents
-    copy: src=debian/lib_live_boot_9990-mount-http.sh dest=/lib/live/boot/9990-mount-http.sh
-      owner=root group=root
-
-  - name: Fix live-config hooks bug
-    copy: src=debian/lib_live_config_9990-hooks dest=/lib/live/config/9990-hooks
-      owner=root group=root
-
-  - name: Don't let live-config disable ssh password authentication
-    lineinfile: dest=/lib/live/config/1160-openssh-server
-        regexp="PasswordAuthentication"
-        state=absent
 
   - name: Add live user (for testing)
     user: name=live shell=/bin/bash groups=sudo append=yes
