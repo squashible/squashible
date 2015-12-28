@@ -47,6 +47,3 @@
   - name: Add dracut config to enable livenet module
     copy: src=opensuse/dracut-config dest=/etc/dracut.conf
       owner=root group=root mode=0644
-
-  - name: Create symlink from arping2 to arping to fix dracut network module
-    file: src=/usr/sbin/arping2 dest=/usr/sbin/arping state=link

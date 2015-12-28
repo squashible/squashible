@@ -34,7 +34,6 @@ minimal_packages:
     - sudo
     - wget
   Suse:
-    - arping2
     - binutils
     - curl
     - dhcp
