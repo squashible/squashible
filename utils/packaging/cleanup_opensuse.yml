@@ -15,6 +15,7 @@
 
   - name: Regenerate initramfs using dracut
     command: dracut --force --regenerate-all
+    ignore_errors: true
 
 #  - name: Apply default SELinux contexts to the system
 #    shell: restorecon -R /
