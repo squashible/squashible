@@ -46,6 +46,7 @@ minimal_packages:
     - kernel-default
     - logrotate
     - net-tools
+    - nfs-client
     - openssh
     - patch
     - rsync
