@@ -27,7 +27,7 @@
     when: hostvars[chrootpath]['ansible_os_family'] == "RedHat"
 
   - include: packaging_opensuse.yml
-    when: hostvars[chrootpath]['ansible_os_family'] == "openSUSE Leap"
+    when: hostvars[chrootpath]['ansible_os_family'] == "Suse"
 
   - include: packaging_ubuntu.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Ubuntu"

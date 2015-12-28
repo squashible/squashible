@@ -7,7 +7,7 @@
     when: ansible_os_family == "RedHat"
 
   - include: cleanup_opensuse.yml
-    when: ansible_os_family == "openSUSE Leap"
+    when: ansible_os_family == "Suse"
 
   - include: cleanup_ubuntu.yml
     when: ansible_distribution == "Ubuntu"

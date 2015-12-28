@@ -29,7 +29,7 @@
     when: ansible_os_family == "RedHat"
 
   - include: opensuse.yml
-    when: ansible_os_family == "openSUSE Leap"
+    when: ansible_os_family == "Suse"
  
   - include: ubuntu.yml
     when: ansible_distribution == "Ubuntu"
