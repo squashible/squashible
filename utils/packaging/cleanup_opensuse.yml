@@ -14,7 +14,7 @@
     shell: depmod -a {{ kernel_version.stdout }}
 
   - name: Regenerate initramfs using dracut
-    shell: dracut --force --regenerate-all
+    command: dracut --force --regenerate-all
 
 #  - name: Apply default SELinux contexts to the system
 #    shell: restorecon -R /
