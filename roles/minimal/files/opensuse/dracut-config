@@ -1,7 +1,7 @@
 # Added to enable live booting for wisp
 
-add_dracutmodules+="btrfs livenet nfs network base"
-install_items+="mkfs.btrfs rsync df ctorrent"
+add_dracutmodules+="livenet nfs network base"
+install_items+="rsync df ctorrent"
 
 show_modules=yes
 hostonly="no"
