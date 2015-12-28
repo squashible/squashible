@@ -39,8 +39,10 @@ minimal_packages:
     - curl
     - dracut
     - hostname
+    - iproute2
     - kernel-default
     - logrotate
+    - net-tools
     - openssh
     - patch
     - rsync
@@ -48,6 +50,7 @@ minimal_packages:
     - sudo
     - tar
     - wget
+    - wicked
   Ubuntu:
     - apt-utils
     - dracut
