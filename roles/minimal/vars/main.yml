@@ -37,7 +37,10 @@ minimal_packages:
     - arping2
     - binutils
     - curl
+    - dhcp
+    - dhcp-client
     - dracut
+    - dracut-tools
     - hostname
     - iproute2
     - kernel-default
