@@ -1,0 +1,21 @@
+---
+  - name: Grab full path to latest chroot xen
+    shell: ls -dt live_chroot/boot/xen-4.*.*.gz | grep -v "d.gz" | head -1
+    register: xen_path
+
+  - name: Unzip Xen
+    shell: gunzip {{ xen_path['stdout'] }}
+
+  - name: Grab full path to latest extracted chroot xen
+    shell: ls -dt {{ chrootpath }}/boot/xen-4.* | head -1
+    register: xen_extracted_path
+
+  - name: Rename xen file
+    command: mv {{ xen_extracted_path['stdout'] }} {{ chrootpath }}/boot/xen
+
+  - name: Grab full path to latest chroot unzipped xen
+    shell: ls -dt {{ chrootpath }}/boot/xen
+    register: xen_path
+
+  - name: Copy xen to output directory
+    shell: "cp {{ xen_path['stdout'] }} {{ outputpath }}/xen"
