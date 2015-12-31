@@ -14,11 +14,11 @@
     when: xen_present.stat.exists == True
 
   - name: Grab full path to latest chroot kernel
-    shell: ls -dt {{ chrootpath }}/boot/vmlin* | head -1
+    shell: ls -dt {{ chrootpath }}/boot/vmlin* | grep -v "fallback" | head -1
     register: kernel_path
 
   - name: Grab full path to latest chroot initrd
-    shell: ls -dt {{ chrootpath }}/boot/initr* | head -1
+    shell: ls -dt {{ chrootpath }}/boot/initr* | grep -v "fallback" | head -1
     register: initrd_path
 
   - name: Copy kernel/initrd to output directory
