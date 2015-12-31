@@ -29,6 +29,7 @@ supported_live_os:
   - fedora_23
   - opensuse_42.1
   - ubuntu_15.10
+  - xenserver_6
 
 # Builder systems must have these packages installed.
 builder_required_packages:
