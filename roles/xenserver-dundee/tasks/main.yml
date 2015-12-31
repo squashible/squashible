@@ -1,5 +1,8 @@
 ---
 
+  - name: Dump all vars
+    action: template src=dumpall.j2 dest=/tmp/ansible.all
+
   - name: Clean up state files
     file:
       dest: "/etc/firstboot.d/state"
