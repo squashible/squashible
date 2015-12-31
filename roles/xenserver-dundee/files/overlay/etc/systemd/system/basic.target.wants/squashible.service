@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Squashible scripts
+Before=basic.target local-fs.target sysinit.target shutdown.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -x /usr/local/bin/squashible.sh
+TimeoutSec=120
+

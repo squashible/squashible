@@ -1,0 +1,28 @@
+---
+
+  - name: Clean up state files
+    file:
+      dest: "/etc/firstboot.d/state"
+      state: "{{ item }}"
+    with_items:
+      - absent
+      - directory
+
+  - name: Remove xapi files
+    file:
+      dest: "/var/lib/xcp"
+      state: "{{ item }}"
+    with_items:
+      - absent
+      - directory
+
+  - name: Remove xapi files
+    file:
+      dest: "/etc/firstboot.d/data/management.conf"
+      state: "absent"
+
+  - name: Disable firstboot
+    service: name=firstboot enabled=no
+
+  - name: Apply xenserver overlay
+    copy: src=overlay/ dest=/
