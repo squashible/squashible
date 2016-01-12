@@ -12,7 +12,7 @@
     with_items:
       - "{{ minimal_packages }}"
 
- - name: Install SELinux packages
+  - name: Install SELinux packages
     apt: pkg={{item}} state=latest
     with_items:
       - "{{ selinux_packages }}"
