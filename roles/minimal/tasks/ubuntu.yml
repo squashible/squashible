@@ -15,7 +15,7 @@
       minimal_packages: "{{ minimal_packages | join (' ') }}"
 
   - name: Install minimum packages
-    shell: "{{ ansible_pkg_mgr }} --force-yes -qq install {{ minimal_packages }}"
+    shell: "apt-get --force-yes -qq install {{ minimal_packages }}"
 
   - name: Add support for DNS resolution in initramfs
     lineinfile: >

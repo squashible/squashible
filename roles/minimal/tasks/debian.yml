@@ -12,10 +12,10 @@
       minimal_packages: "{{ minimal_packages | join (' ') }}"
 
   - name: Install minimum packages
-    shell: "{{ ansible_pkg_mgr }} -qq install {{ minimal_packages }}"
+    shell: "apt-get -qq install {{ minimal_packages }}"
 
   - name: Install SELinux packages
-    shell: "{{ ansible_pkg_mgr }} -qq install {{ selinux_packages }}"
+    shell: "apt-get -qq install {{ selinux_packages }}"
     when: selinux_enabled
 
   - name: Remove hostname file, let live-config take care of it
