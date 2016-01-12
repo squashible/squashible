@@ -10,4 +10,6 @@ minimal_packages:
    - rsync
    - squashfs-tools
    - sudo
+   - systemd
+   - systemd-sysv
    - wget
