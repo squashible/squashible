@@ -10,7 +10,7 @@
   - name: Install SELinux packages
     apt: pkg={{item}} state=latest
     with_items:
-      - "{{selinux_packages['Debian']}}"
+      - "{{ selinux_packages }}"
     when: selinux_enabled
 
   - name: Convert to systemd
@@ -22,7 +22,7 @@
   - name: Install minimal packages
     apt: pkg={{item}} state=latest
     with_items:
-      - "{{ minimal_packages['Debian'] }}"
+      - "{{ minimal_packages }}"
 
   - name: Remove hostname file, let live-config take care of it
     file: path=/etc/hostname state=absent

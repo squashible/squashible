@@ -1,0 +1,22 @@
+---
+minimal_packages:
+   - binutils
+   - curl
+   - dhcp
+   - dhcp-client
+   - dracut
+   - dracut-tools
+   - hostname
+   - iproute2
+   - kernel-default
+   - logrotate
+   - net-tools
+   - nfs-client
+   - openssh
+   - patch
+   - rsync
+   - squashfs
+   - sudo
+   - tar
+   - wget
+   - wicked

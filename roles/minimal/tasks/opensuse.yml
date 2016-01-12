@@ -4,7 +4,7 @@
     shell: "{{item}}"
     with_items:
       - zypper -n update
-      - zypper -n install {{ minimal_packages['Suse'] | join (" ") }}
+      - zypper -n install {{ minimal_packages | join (" ") }}
 
 #  - name: Install SELinux packages
 #    shell: yum -y install {{ selinux_packages['Suse'] | join (" ") }}

@@ -1,0 +1,19 @@
+---
+minimal_packages:
+   - apt-utils
+   - ctorrent
+   - dracut
+   - dracut-network
+   - libpath-class-file-stat-perl
+   - logrotate
+   - openssh-client
+   - openssh-server
+   - rsync
+   - squashfs-tools
+   - sudo
+   - wget
+
+selinux_packages:
+   - auditd
+   - selinux-basics
+   - selinux-utils

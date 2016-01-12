@@ -1,0 +1,13 @@
+---
+minimal_packages:
+   - apt-utils
+   - dracut
+   - dracut-network
+   - initramfs-tools
+   - logrotate
+   - openssh-client
+   - openssh-server
+   - rsync
+   - squashfs-tools
+   - sudo
+   - wget

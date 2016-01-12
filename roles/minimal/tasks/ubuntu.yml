@@ -22,7 +22,7 @@
   - name: Install minimal packages
     apt: pkg={{item}} state=latest force=yes
     with_items:
-      - "{{ minimal_packages['Ubuntu'] }}"
+      - "{{ minimal_packages }}"
 
   - name: Add support for DNS resolution in initramfs
     lineinfile: >
