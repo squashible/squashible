@@ -1,7 +1,7 @@
 ---
 
   - name: Import OS specific variables
-    include_vars: "{{ ansible_os_family }}_{{ ansible_architecture }}.yml"
+    include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
 
   - name: Dump all vars
     action: template src=dumpall.j2 dest=/tmp/ansible.all
