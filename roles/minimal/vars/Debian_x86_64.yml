@@ -11,8 +11,6 @@ minimal_packages:
    - rsync
    - squashfs-tools
    - sudo
-   - systemd
-   - systemd-sysv
    - wget
 
 selinux_packages:

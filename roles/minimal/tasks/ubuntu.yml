@@ -10,12 +10,13 @@
   - name: Add ppa for dracut to fix some conflicts https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1109029 
     apt_repository: repo='deb http://ppa.launchpad.net/morty/dracut-release/ubuntu {{ ansible_distribution_release }} main' state=present
 
-  - name: Set minimal_packages
-    set_fact:
-      minimal_packages: "{{ minimal_packages | join (' ') }}"
+  - name: Upgrade all packages in chroot
+    apt: update_cache=yes upgrade=dist
 
-  - name: Install minimum packages
-    shell: "apt-get --force-yes -qq install {{ minimal_packages }}"
+  - name: Install minimal packages
+    apt: pkg={{item}} state=latest force=yes
+    with_items:
+      - "{{ minimal_packages }}"
 
   - name: Add support for DNS resolution in initramfs
     lineinfile: >

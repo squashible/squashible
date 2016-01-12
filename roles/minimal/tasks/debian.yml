@@ -7,15 +7,15 @@
   - name: Upgrade all packages in chroot
     apt: update_cache=yes upgrade=dist
 
-  - name: Set minimal_packages
-    set_fact:
-      minimal_packages: "{{ minimal_packages | join (' ') }}"
+  - name: Install minimal packages
+    apt: pkg={{item}} state=latest force=yes
+    with_items:
+      - "{{ minimal_packages }}"
 
-  - name: Install minimum packages
-    shell: "apt-get -qq install {{ minimal_packages }}"
-
-  - name: Install SELinux packages
-    shell: "apt-get -qq install {{ selinux_packages }}"
+ - name: Install SELinux packages
+    apt: pkg={{item}} state=latest
+    with_items:
+      - "{{ selinux_packages }}"
     when: selinux_enabled
 
   - name: Remove hostname file, let live-config take care of it
