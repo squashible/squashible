@@ -3,9 +3,6 @@
   - name: Import OS specific variables
     include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
 
-  - name: Dump all vars
-    action: template src=dumpall.j2 dest=/tmp/ansible.all
-
   - name: Set /etc/resolv.conf
     lineinfile: >
         dest=/etc/resolv.conf
