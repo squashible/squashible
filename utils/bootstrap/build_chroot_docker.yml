@@ -26,7 +26,7 @@
     register: container_pid
 
   - name: Waiting for docker container to finish bootstrapping
-    wait_for: path=/proc/{{container_pid.stdout | int}}/status state=absent
+    wait_for: path=/proc/{{container_pid.stdout | int}}/status state=absent timeout=500
 
   - name: Extract the filesystem to our chroot
     shell: docker cp squashible-{{ansible_run_uuid}}:/tmp/bootstrap/ {{ chrootpath }}
