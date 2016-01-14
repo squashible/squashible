@@ -1,8 +1,5 @@
 ---
 
-  - name: Dump all vars
-    action: template src=dumpall.j2 dest=/tmp/ansible.all
-
   - name: Install ctorrent x64 binary for Dracut torrent support
     copy:
       src: ctorrent
