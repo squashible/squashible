@@ -1,6 +1,7 @@
 ---
 minimal_packages:
    - apt-utils
+   - aria2
    - dracut
    - dracut-network
    - initramfs-tools

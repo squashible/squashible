@@ -1,5 +1,6 @@
 ---
 minimal_packages:
+   - aria2
    - binutils
    - btrfs-progs
    - ctorrent
