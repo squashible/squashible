@@ -1,13 +1,5 @@
 ---
 
-  - name: Install EPEL RPM for CentOS 7
-    shell: "{{item}}"
-    with_items:
-      - curl -so /tmp/epel-release-7-5.noarch.rpm http://mirrors.kernel.org/fedora-epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-      - rpm -Uvh /tmp/epel-release-7-5.noarch.rpm
-      - rm -f /tmp/epel-release-7-5.noarch.rpm
-    when: ansible_distribution == 'CentOS'
-
   - name: Set minimal_packages
     set_fact: 
       minimal_packages: "{{ minimal_packages | join (' ') }}"

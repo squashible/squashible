@@ -1,6 +1,5 @@
 ---
 minimal_packages:
-   - aria2
    - binutils
    - curl
    - dhcp
