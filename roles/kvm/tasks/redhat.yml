@@ -1,0 +1,8 @@
+---
+
+  - name: Set kvm_packages
+    set_fact: 
+      kvm_packages: "{{ kvm_packages | join (' ') }}"
+
+  - name: Install kvm package set
+    shell: "{{ ansible_pkg_mgr }} -y install {{ kvm_packages }}"

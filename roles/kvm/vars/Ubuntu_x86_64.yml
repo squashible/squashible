@@ -1,0 +1,3 @@
+---
+kvm_packages:
+   - qemu-kvm

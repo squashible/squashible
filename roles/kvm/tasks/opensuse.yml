@@ -1,0 +1,7 @@
+---
+
+  - name: Upgrade and install kvm package set
+    shell: "{{item}}"
+    with_items:
+      - zypper -n update
+      - zypper -n install {{ kvm_packages | join (" ") }}
