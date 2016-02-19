@@ -1,5 +1,13 @@
 ---
 
+  - name: Set /etc/apt/sources.list
+    template:
+      src: ubuntu/etc-apt-sources.list
+      dest: /etc/apt/sources.list
+      owner: root
+      group: root
+      mode: 0644
+
   - name: Disable daemon startup with policy-rc.d file
     copy: src=debian/usr-sbin-policy-rc.d dest=/usr/sbin/policy-rc.d
       owner=root group=root mode=0755
