@@ -1,0 +1,12 @@
+---
+
+  - name: Set xen_packages
+    set_fact:
+      xen_packages: "{{ xen_packages | join (' ') }}"
+
+  - name: Install centos-release-xen repo
+    shell: "{{ ansible_pkg_mgr }} -y install centos-release-xen
+    when: ansible_distribution == "CentOS"
+
+  - name: Install xen package set
+    shell: "{{ ansible_pkg_mgr }} -y install {{ xen_packages }}"

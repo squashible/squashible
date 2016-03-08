@@ -1,0 +1,9 @@
+---
+
+  - name: Upgrade all packages in chroot
+    apt: update_cache=yes upgrade=dist
+
+  - name: Install xen packages
+    apt: pkg={{item}} state=latest force=yes
+    with_items:
+      - "{{ xen_packages }}"

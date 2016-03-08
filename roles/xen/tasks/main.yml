@@ -1,0 +1,16 @@
+---
+
+  - name: Import OS specific variables
+    include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
+
+  - include: debian.yml
+    when: ansible_distribution == 'Debian'
+
+  - include: redhat.yml
+    when: ansible_os_family == "RedHat"
+
+  - include: opensuse.yml
+    when: ansible_os_family == "Suse"
+
+  - include: ubuntu.yml
+    when: ansible_distribution == "Ubuntu"

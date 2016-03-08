@@ -1,0 +1,7 @@
+---
+
+  - name: Upgrade and install xen package set
+    shell: "{{item}}"
+    with_items:
+      - zypper -n update
+      - zypper -n install {{ xen_packages | join (" ") }}

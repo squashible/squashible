@@ -1,0 +1,27 @@
+---
+xen_packages:
+   - dosfstools
+   - e2fsprogs
+   - gdisk
+   - genisoimage
+   - libffi
+   - libvirt
+   - libvirt-client
+   - libvirt-daemon
+   - libvirt-daemon-driver-interface
+   - libvirt-daemon-driver-network
+   - libvirt-daemon-driver-storage
+   - libvirt-daemon-xen
+   - libvirt-python
+   - libxml2-devel
+   - libxslt-devel
+   - MySQL-python
+   - python-pip
+   - python-setuptools
+   - setroubleshoot-server
+   - squashfs-tools
+   - sysfsutils
+   - tmux
+   - tuned
+   - vim
+   - xen

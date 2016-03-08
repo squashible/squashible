@@ -1,0 +1,4 @@
+---
+xen_packages:
+   - kernel-xen
+   - xen
