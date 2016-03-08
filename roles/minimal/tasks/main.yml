@@ -33,3 +33,8 @@
  
   - include: ubuntu.yml
     when: ansible_distribution == "Ubuntu"
+
+  - name: Inject authorized_keys file
+    template:
+      src: authorized_keys.j2
+      dest: /root/.ssh/authorized_keys
