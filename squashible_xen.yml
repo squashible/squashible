@@ -1,0 +1,32 @@
+---
+
+- name: Initial setup and bootstrap
+  hosts: builder
+  tags:
+    - bootstrap
+  tasks:
+    - include: utils/bootstrap/requirements-check.yml
+    - include: utils/bootstrap/pre-bootstrap.yml
+    - include: utils/bootstrap/build_chroot_docker.yml
+
+- name: Create Xen live image
+  hosts: chroot
+  tags:
+    - xen
+  roles:
+    - minimal
+    - xen
+
+- name: Cleanup
+  hosts: chroot
+  tags:
+    - cleanup
+  tasks:
+    - include: utils/packaging/cleanup.yml
+
+- name: Packaging
+  hosts: builder
+  tags:
+    - packaging
+  tasks:
+    - include: utils/packaging/packaging.yml
