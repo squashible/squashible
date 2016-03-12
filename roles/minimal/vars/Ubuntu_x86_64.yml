@@ -3,7 +3,7 @@ minimal_packages:
    - apt-utils
    - dracut
    - dracut-network
-   - linux-initramfs-tool
+   - initramfs-tools
    - logrotate
    - openssh-client
    - openssh-server
