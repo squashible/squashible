@@ -1,0 +1,13 @@
+---
+  nova_venv_packages:
+    - gcc
+    - git
+    - python-devel
+    - python-setuptools
+    - openssl-devel
+    - openssl-static
+    - libffi-devel
+    - libxml2-devel
+    - libxslt-devel
+    - patch
+    - redhat-rpm-config

@@ -3,6 +3,13 @@
   - name: Import OS specific variables
     include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
 
+  - name: Install packages to build virtualenv
+    package:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+    - {{ nova_venv_packages }}
+
   - name: Checkout Openstack Nova
     git: 
       repo: https://github.com/openstack/nova.git
