@@ -8,7 +8,7 @@
       name: "{{ item }}"
       state: latest
     with_items:
-    - {{ nova_venv_packages }}
+    - "{{ nova_venv_packages }}"
 
   - name: Checkout Openstack Nova
     git: 
