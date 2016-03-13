@@ -3,12 +3,17 @@
   - name: Import OS specific variables
     include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
 
-  - name: Install packages to build virtualenv
-    package:
-      name: "{{ item }}"
-      state: latest
-    with_items:
-    - "{{ nova_venv_packages }}"
+  - include: debian.yml
+    when: ansible_distribution == 'Debian'
+
+  - include: redhat.yml
+    when: ansible_os_family == "RedHat"
+
+  - include: opensuse.yml
+    when: ansible_os_family == "Suse"
+
+  - include: ubuntu.yml
+    when: ansible_distribution == "Ubuntu"
 
   - name: Checkout Openstack Nova
     git: 

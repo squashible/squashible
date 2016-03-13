@@ -1,0 +1,9 @@
+---
+
+  - name: Set nova_venv__packages
+    set_fact:
+      nova_venv_packages: "{{ nova_venv_packages | join (' ') }}"
+
+  - name: Install nova_venv_packages
+    shell: "{{ ansible_pkg_mgr }} -y install {{ nova_venv_packages }}"
+

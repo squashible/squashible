@@ -1,0 +1,8 @@
+---
+  - name: Upgrade all packages in chroot
+    apt: update_cache=yes upgrade=dist
+
+  - name: Install packages to build nova_venv
+    apt: pkg={{item}} state=latest force=yes
+    with_items:
+      - "{{ nova_venv_packages }}"

@@ -1,0 +1,6 @@
+---
+  - name: Upgrade and install packages to build nova_venv 
+    shell: "{{item}}"
+    with_items:
+      - zypper -n update
+      - zypper -n install {{ nova_venv_packages | join (" ") }}
