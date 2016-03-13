@@ -56,4 +56,4 @@ user_ssh_keys:
   - example_key_2
 
 # specify nova branch to use - https://github.com/openstack/nova
-openstack-nova-branch: master
+openstack_nova_branch: master

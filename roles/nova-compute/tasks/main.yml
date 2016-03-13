@@ -33,22 +33,22 @@
 
   - name: Create directories
     file:
-      path: /opt/openstack/nova/{{ openstack-nova-branch }}
+      path: /opt/openstack/nova/{{ openstack_nova_branch }}
       state: directory
 
   - name: Link to nova-master directory
     file:
-      src: /opt/openstack/nova/{{ openstack-nova-branch }}
+      src: /opt/openstack/nova/{{ openstack_nova_branch }}
       dest: /opt/openstack/nova/current
       state: link
 
   - name: Create virtualenv
-    command: virtualenv /opt/openstack/nova/{{ openstack-nova-branch }}
+    command: virtualenv /opt/openstack/nova/{{ openstack_nova_branch }}
 
   - name: Enter virtualenv
     command: source bin/activate
     args:
-      chdir: /opt/openstack/nova/{{ openstack-nova-branch }}
+      chdir: /opt/openstack/nova/{{ openstack_nova_branch }}
 
   - name: Run nova install
     command: python setup.py install
@@ -64,7 +64,7 @@
     command: deactivate
 
   - name: Make the virtualev relocatable
-    command: virtualenv --relocatable /opt/openstack/nova/{{ openstack-nova-branch }}
+    command: virtualenv --relocatable /opt/openstack/nova/{{ openstack_nova_branch }}
 
   - name: Add openstack-nova-compute service
     copy:
