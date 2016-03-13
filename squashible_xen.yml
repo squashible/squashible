@@ -16,6 +16,7 @@
   roles:
     - minimal
     - xen
+    - nova-compute
 
 - name: Cleanup
   hosts: chroot

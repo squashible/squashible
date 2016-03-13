@@ -16,6 +16,7 @@
   roles:
     - minimal
     - kvm
+    - nova-compute
 
 - name: Cleanup
   hosts: chroot

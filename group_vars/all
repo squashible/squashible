@@ -54,3 +54,6 @@ builder_required_packages:
 user_ssh_keys:
   - example_key_1
   - example_key_2
+
+# specify nova branch to use - https://github.com/openstack/nova
+openstack-nova-branch: master

@@ -1,0 +1,76 @@
+---
+
+  - name: Import OS specific variables
+    include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
+
+  - name: Checkout Openstack Nova
+    git: 
+      repo: https://github.com/openstack/nova.git
+      dest: /opt/nova
+      version: master
+      depth: 1
+
+  - name: Install pip
+    easy_install: 
+      name: pip
+      state: latest
+
+  - name: Install modules
+    pip:
+      name: virtualenv
+
+  - name: Create directories
+    file:
+      path: /opt/openstack/nova/{{ openstack-nova-branch }}
+      state: directory
+
+  - name: Link to nova-master directory
+    file:
+      src: /opt/openstack/nova/{{ openstack-nova-branch }}
+      dest: /opt/openstack/nova/current
+      state: link
+
+  - name: Create virtualenv
+    command: virtualenv /opt/openstack/nova/{{ openstack-nova-branch }}
+
+  - name: Enter virtualenv
+    command: source bin/activate
+    args:
+      chdir: /opt/openstack/nova/{{ openstack-nova-branch }}
+
+  - name: Run nova install
+    command: python setup.py install
+    args:
+      chdir: /opt/nova
+
+  - name: Install pip requirements
+    command: pip install --build /opt/tmp -r requirements.txt
+    args:
+      chdir: /opt/nova
+
+  - name: Deactivate virtualenv
+    command: deactivate
+
+  - name: Make the virtualev relocatable
+    command: virtualenv --relocatable /opt/openstack/nova/{{ openstack-nova-branch }}
+
+  - name: Add openstack-nova-compute service
+    copy:
+      src: openstack-nova-compute.service
+      dest: /usr/lib/systemd/system/openstack-nova-compute.service
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Enable systemd services
+    file: 
+      src: {{ item.path }}
+      dest: {{ item.dest }}
+      state:link
+    with_items:
+      - { path: '/usr/lib/systemd/system/openstack-nova-compute.service', dest: '/etc/systemd/system/multi-user.target.wants/openstack-nova-compute.service' }
+
+  - name: Cleanup
+    file:
+      path: /opt/nova
+      state: absent
