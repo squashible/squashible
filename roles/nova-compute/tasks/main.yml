@@ -45,7 +45,8 @@
   - name: Install build_nova_venv.sh
     template:
       src: build_nova_venv.sh.j2
-      dest: /opt/openstack/nova
+      dest: /opt/openstack/nova/build_nova_venv.sh
+      mode: 0744
 
   - name: Run build_nova_venv.sh
     command: ./build_nova_venv.sh
