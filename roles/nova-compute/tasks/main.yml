@@ -70,5 +70,8 @@
 
   - name: Cleanup
     file:
-      path: /opt/nova
+      path: "{{ item }}"
       state: absent
+    with_items:
+    - /opt/nova
+    - /opt/openstack/nova/build_nova_venv.sh
