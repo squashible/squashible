@@ -13,6 +13,7 @@
       - umount temp
       - tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img
       - mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img
+      - rm rootfs.img
 
   - name: Remove temporary directory
     file: dest=temp state=absent
