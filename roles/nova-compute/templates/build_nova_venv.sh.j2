@@ -3,7 +3,7 @@
 virtualenv /opt/openstack/nova/{{ openstack_nova_branch }}
 
 # Hop into the virtualenv and install nova
-/opt/openstack/nova/{{ openstack_nova_branch }}
+cd /opt/openstack/nova/{{ openstack_nova_branch }}
 source bin/activate
 cd /opt/nova/
 python setup.py install
