@@ -6,7 +6,7 @@
   - name: Prepare a sparse file
     shell: "{{ item }}"
     with_items:
-      - fallocate -l 2G rootfs.img
+      - fallocate -l 4G rootfs.img
       - mkfs.ext4 -F rootfs.img
       - mount -t ext4 rootfs.img temp
       - rsync -a --xattrs {{ chrootpath }}/ temp/
