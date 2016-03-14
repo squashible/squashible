@@ -1,0 +1,18 @@
+#!/bin/bash
+# generates nova virtualenv
+virtualenv /opt/openstack/nova/{{ openstack_nova_branch }}
+
+# Hop into the virtualenv and install nova
+/opt/openstack/nova/{{ openstack_nova_branch }}
+source bin/activate
+cd /opt/nova/
+python setup.py install
+
+# Ensure we have all of our requirements in the virtualenv
+pip install --build /opt/tmp -r requirements.txt
+
+# Hop out of the virtualenv
+deactivate
+
+# Make the virtualenv relocatable
+virtualenv --relocatable /opt/openstack/nova/{{ openstack_nova_branch }

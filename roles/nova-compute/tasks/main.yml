@@ -42,29 +42,15 @@
       dest: /opt/openstack/nova/current
       state: link
 
-  - name: Create virtualenv
-    shell: virtualenv /opt/openstack/nova/{{ openstack_nova_branch }}
+  - name: Install build_nova_venv.sh
+    template:
+      src: build_nova_venv.sh.j2
+      dest: /opt/openstack/nova
 
-  - name: Enter virtualenv
-    shell: source bin/activate
+  - name: Run build_nova_venv.sh
+    command: ./build_nova_venv.sh
     args:
-      chdir: /opt/openstack/nova/{{ openstack_nova_branch }}
-
-  - name: Run nova install
-    shell: python setup.py install
-    args:
-      chdir: /opt/nova
-
-  - name: Install pip requirements
-    shell: pip install --build /opt/tmp -r requirements.txt
-    args:
-      chdir: /opt/nova
-
-  - name: Deactivate virtualenv
-    shell: deactivate
-
-  - name: Make the virtualev relocatable
-    shell: virtualenv --relocatable /opt/openstack/nova/{{ openstack_nova_branch }}
+      chdir: /opt/openstack/nova
 
   - name: Add openstack-nova-compute service
     copy:
