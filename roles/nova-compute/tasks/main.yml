@@ -76,3 +76,6 @@
     with_items:
     - /opt/nova
     - /opt/openstack/nova/build_nova_venv.sh
+    - /root/.cache
+    - /opt/tmp
+
