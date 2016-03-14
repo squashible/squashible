@@ -46,9 +46,9 @@
     command: virtualenv /opt/openstack/nova/{{ openstack_nova_branch }}
 
   - name: Enter virtualenv
-    command: source bin/activate
+    shell: source bin/activate
     args:
-      chdir: /opt/openstack/nova/{{ openstack_nova_branch }}/
+      chdir: /opt/openstack/nova/{{ openstack_nova_branch }}
 
   - name: Run nova install
     command: python setup.py install
