@@ -4,13 +4,16 @@ minimal_packages:
    - ctorrent
    - dracut
    - dracut-network
+   - iputils-ping
    - libpath-class-file-stat-perl
    - logrotate
+   - nano
    - openssh-client
    - openssh-server
    - rsync
    - squashfs-tools
    - sudo
+   - vim
    - wget
 
 selinux_packages:
