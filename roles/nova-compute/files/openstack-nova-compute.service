@@ -9,7 +9,7 @@ NotifyAccess=all
 TimeoutStartSec=0
 Restart=always
 User=nova
-ExecStart=/opt/openstack/nova/current/nova/bin/nova-compute
+ExecStart=/opt/openstack/nova/current/bin/nova-compute
 
 [Install]
 WantedBy=multi-user.target
