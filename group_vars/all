@@ -57,3 +57,6 @@ user_ssh_keys:
 
 # specify nova branch to use - https://github.com/openstack/nova
 openstack_nova_branch: master
+
+# specify size of rootfs.img (1G, 6G, etc...)
+rootfs_size: 3G
