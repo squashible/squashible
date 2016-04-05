@@ -19,8 +19,9 @@
     git: 
       repo: https://github.com/openstack/nova.git
       dest: /opt/nova
-      version: master
+      version: "{{ openstack_nova_branch }}"
       depth: 1
+    register: gitresult
 
   - name: Install pip
     easy_install: 
@@ -33,12 +34,12 @@
 
   - name: Create directories
     file:
-      path: /opt/openstack/nova/{{ openstack_nova_branch }}
+      path: /opt/openstack/nova/{{ gitresult.after }}
       state: directory
 
   - name: Link to nova-master directory
     file:
-      src: /opt/openstack/nova/{{ openstack_nova_branch }}
+      src: /opt/openstack/nova/{{ gitresult.after }}
       dest: /opt/openstack/nova/current
       state: link
 
