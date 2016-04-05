@@ -1,0 +1,9 @@
+---
+  - name: Generate rootfs.img torrent
+    command: mktorrent \
+             --announce={{ torrent_announce_url }} \
+             --comment={{ live_os }} \
+             --threads=8 \
+             --output={{ outputpath }}/rootfs.torrent \
+             --verbose \ 
+             {{ outputpath }}/rootfs.img

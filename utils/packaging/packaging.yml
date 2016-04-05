@@ -38,3 +38,6 @@
 
   - include: packaging_ubuntu.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Ubuntu"
+
+  - include: packaging_torrent.yml
+    when: torrent_announce_url is defined
