@@ -62,4 +62,4 @@ openstack_nova_branch: master
 rootfs_size: 3G
 
 # specify torrent announce url (if not set, skips torrent generator)
-torrent_announce_url: http://images.squashible.com:6969/announce
+torrent_announce_url: http://tracker.squashible.com:6969/announce
