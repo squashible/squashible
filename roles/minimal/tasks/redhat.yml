@@ -64,5 +64,5 @@
     when: ansible_distribution == 'Fedora' and ansible_distribution_version == "23"
 
   - name: Add dracut config to enable livenet module
-    copy: src=redhat/wisp-dracut-config dest=/etc/dracut.conf.d/wisp.conf
+    copy: src=redhat/dracut-config dest=/etc/dracut.conf.d/dracut.conf
       owner=root group=root mode=0644
