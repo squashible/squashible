@@ -37,17 +37,14 @@ builder_required_packages:
     - btrfs-progs
     - docker-io
     - python-docker-py
-    - squashfs-tools
     - uuid
   Debian:
     - docker.io
 #    - python-docker
-    - squashfs-tools
     - uuid
   Suse:
     - docker
     - python-docker-py
-    - squashfs
     - uuid
 
 # public keys put here will be populated into /root/.ssh/authorized_keys
