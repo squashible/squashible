@@ -1,22 +1,22 @@
-# Squashible
+# squashible
 
 ### Cross-Platform Linux Live Image Builder
 
 ## Getting Started
 
-#### Requirements
+### Requirements
 
 Recommended Build Server Versions:
 
     Fedora 23
     Ubuntu 15.10
 
-Packages
+Required Packages:
 
     Ansible >= 2.0.1.0
     Docker
 
-#### Building an image
+### Building an image
 
 Edit the group_vars/all file and set the appropriate settings.  Recommended
 settings to change are:
@@ -40,3 +40,20 @@ Available playbooks to run:
 
 Output of the build will be put into {{ outputpath }} which by default is
 ./live_output directory.
+
+### Booting the images
+
+Here are some examples for booting the image once you've generated one:
+
+#### iPXE
+
+    kernel http://$deployment_server/images/images/fedora-23-kvm/vmlinuz
+    module http://$deployment_server/images/images/fedora-23-kvm/initrd.img
+    imgargs vmlinuz root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.img ip=dhcp nameserver=8.8.8.8 nomodeset rd.writable.fsimg rd.info rd.shell
+
+#### kexec
+
+    kexec -l vmlinuz —initrd=initrd.img \
+    —command-line=“root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.img \
+    ip=dhcp nameserver=8.8.8.8 rd.writable.fsimg rd.info rd.shell”
+    kexec -e
