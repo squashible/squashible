@@ -2,6 +2,19 @@
 
 ### Cross-Platform Linux Live Image Builder
 
+## What is this?
+
+Squashible is a tool created to generate a bootable LiveOS rapidly and consistently
+across multiple operating systems.  It primarily relies on dracut to boot the
+LiveOS.
+
+It utilizes docker to create enough operating system for Ansible to function and
+apply all configuration changes from that point.  It then packages up the build into
+a vmlinuz, an initrd.img, and a rootfs.img.
+
+This is a work in progress.  Things will probably blow up.
+Pull requests and issues welcome!
+
 ## Getting Started
 
 ### Requirements
