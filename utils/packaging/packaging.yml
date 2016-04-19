@@ -27,6 +27,11 @@
       - cp {{ kernel_path['stdout'] }} {{ outputpath }}/vmlinuz
       - cp {{ initrd_path['stdout'] }} {{ outputpath }}/initrd.img
 
+  - name: Remove resolv.conf to remove build server cruft
+    file:
+      path: /etc/resolv.conf
+      state: absent
+
   - include: packaging_debian.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Debian"
 
