@@ -40,6 +40,7 @@ builder_required_packages:
     - uuid
   Debian:
     - docker.io
+    - mktorrent
 #    - python-docker
     - uuid
   Suse:
