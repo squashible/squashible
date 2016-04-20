@@ -27,10 +27,19 @@
       - cp {{ kernel_path['stdout'] }} {{ outputpath }}/vmlinuz
       - cp {{ initrd_path['stdout'] }} {{ outputpath }}/initrd.img
 
-  - name: Remove resolv.conf to remove build server cruft
+  - name: Remove resolv.conf to remove build server addresses
     file:
       path: "{{ chrootpath }}/etc/resolv.conf"
       state: absent
+
+  - name: Regenerate /etc/resolv.conf
+    lineinfile:
+        dest: "{{ chrootpath }}/etc/resolv.conf"
+        line: "{{ item }}"
+        create: yes
+    with_items:
+      - 'nameserver 8.8.8.8'
+      - 'nameserver 8.8.4.4'
 
   - include: packaging_debian.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Debian"
