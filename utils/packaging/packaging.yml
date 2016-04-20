@@ -29,7 +29,7 @@
 
   - name: Remove resolv.conf to remove build server cruft
     file:
-      path: {{ chrootpath }}/etc/resolv.conf
+      path: "{{ chrootpath }}/etc/resolv.conf"
       state: absent
 
   - include: packaging_debian.yml
