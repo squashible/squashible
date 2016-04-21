@@ -1,3 +1,18 @@
 ---
 kvm_packages:
-   - qemu-kvm
+   - bridge-utils
+   - dosfstools
+   - dosfstools-dbg
+   - genisoimage
+   - kpartx
+   - libvirt-bin
+   - multipath-tools
+   - nfs-common
+   - open-iscsi
+   - python-libguestfs
+   - python-libvirt
+   - qemu
+   - qemu-utils
+   - sysfsutils
+   - vlan
+   - multipath-tools
