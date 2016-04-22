@@ -1,2 +1,11 @@
 ---
   nova_venv_packages:
+   - gcc
+   - git
+   - python-dev
+   - python-setuptools
+   - libssl-dev
+   - libffi-dev
+   - libxml2-dev
+   - libxslt-dev
+   - patch
