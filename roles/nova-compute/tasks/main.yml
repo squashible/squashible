@@ -57,22 +57,6 @@
     args:
       chdir: /opt/openstack/nova
 
-  - name: Add openstack-nova-compute service
-    copy:
-      src: openstack-nova-compute.service
-      dest: /usr/lib/systemd/system/openstack-nova-compute.service
-      owner: root
-      group: root
-      mode: 0644
-
-  - name: Enable systemd services
-    file: 
-      src: "{{ item.path }}"
-      dest: "{{ item.dest }}"
-      state: link
-    with_items:
-      - { path: '/usr/lib/systemd/system/openstack-nova-compute.service', dest: '/etc/systemd/system/multi-user.target.wants/openstack-nova-compute.service' }
-
   - name: Cleanup
     file:
       path: "{{ item }}"
