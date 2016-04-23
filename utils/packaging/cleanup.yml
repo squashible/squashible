@@ -13,12 +13,12 @@
     when: ansible_distribution == "Ubuntu"
 
   - name: Unmount filesystems left over from a failed build
-    mount: >
-      name={{item.dest}}
-      src={{item.src}}
-      fstype={{item.fstype}}
-      state=unmounted
+    mount:
+      name: "{{item.dest}}"
+      src: "{{item.src}}"
+      fstype: "{{item.fstype}}"
+      state: "unmounted"
     with_items:
-      - { fstype: "proc",       src: "none",        dest: "proc" }
-      - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "sys/fs/selinux" }
-    ignore_errors=true
+    - { fstype: "proc",       src: "none",        dest: "proc" }
+    - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "sys/fs/selinux" }
+    ignore_errors: true
