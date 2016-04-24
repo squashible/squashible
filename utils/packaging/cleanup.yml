@@ -19,6 +19,6 @@
       fstype: "{{item.fstype}}"
       state: "unmounted"
     with_items:
+    - { fstype: "dev",        src: "none",        dest: "dev" }
     - { fstype: "proc",       src: "none",        dest: "proc" }
     - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "sys/fs/selinux" }
-    ignore_errors: true
