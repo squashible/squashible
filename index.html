@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Squashible by squashible</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Squashible</h1>
+        <p>Cross-Platform Linux Live Image Builder</p>
+        <p class="view"><a href="https://github.com/squashible/squashible">View the Project on GitHub <small>squashible/squashible</small></a></p>
+        <ul>
+          <li><a href="https://github.com/squashible/squashible/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/squashible/squashible/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/squashible/squashible">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="squashible" class="anchor" href="#squashible" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>squashible</h1>
+
+<h3>
+<a id="cross-platform-linux-live-image-builder" class="anchor" href="#cross-platform-linux-live-image-builder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cross-Platform Linux Live Image Builder</h3>
+
+<h2>
+<a id="what-is-this" class="anchor" href="#what-is-this" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is this?</h2>
+
+<p>Squashible is a tool created to generate a bootable LiveOS rapidly and consistently
+across multiple operating systems.  It primarily relies on dracut to boot the
+LiveOS.</p>
+
+<p>It utilizes docker to create enough operating system for Ansible to function and
+apply all configuration changes from that point.  It then packages up the build into
+a vmlinuz, an initrd.img, and a rootfs.img.</p>
+
+<p>This is a work in progress.  Things will probably blow up.
+Pull requests and issues welcome!</p>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<h3>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h3>
+
+<p>Recommended Build Server Versions:</p>
+
+<pre><code>Fedora 23
+Ubuntu 15.10
+</code></pre>
+
+<p>Required Packages:</p>
+
+<pre><code>Ansible &gt;= 2.0.1.0
+Docker
+</code></pre>
+
+<h3>
+<a id="building-an-image" class="anchor" href="#building-an-image" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Building an image</h3>
+
+<p>Edit the group_vars/all file and set the appropriate settings.  Recommended
+settings to change are:</p>
+
+<table>
+<thead>
+<tr>
+<th>variable</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>live_os</td>
+<td>set to one of the listed supported_live_os</td>
+</tr>
+<tr>
+<td>user_ssh_keys</td>
+<td>set the public ssh keys you'd like to inject</td>
+</tr>
+</tbody>
+</table>
+
+<p>To run squashible:</p>
+
+<pre><code>ansible-playbook -i hosts_generator.py &lt;playbook.yml&gt;
+</code></pre>
+
+<p>Available playbooks to run:</p>
+
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>squashible.yml</td>
+<td>minimal install</td>
+</tr>
+<tr>
+<td>squashible_kvm.yml</td>
+<td>minimal install + kvm + nova compute</td>
+</tr>
+<tr>
+<td>squashible_xen.yml</td>
+<td>minimal install + xen + nova compute</td>
+</tr>
+</tbody>
+</table>
+
+<p>Output of the build will be put into {{ outputpath }} which by default is
+./live_output directory.</p>
+
+<h3>
+<a id="booting-the-images" class="anchor" href="#booting-the-images" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Booting the images</h3>
+
+<p>Here are some examples for booting the image once you've generated one:</p>
+
+<h4>
+<a id="ipxe" class="anchor" href="#ipxe" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>iPXE</h4>
+
+<pre><code>kernel http://$deployment_server/images/images/fedora-23-kvm/vmlinuz
+module http://$deployment_server/images/images/fedora-23-kvm/initrd.img
+imgargs vmlinuz root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.img ip=dhcp nameserver=8.8.8.8 nomodeset rd.writable.fsimg rd.info rd.shell
+</code></pre>
+
+<h4>
+<a id="kexec" class="anchor" href="#kexec" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>kexec</h4>
+
+<pre><code>kexec -l vmlinuz —initrd=initrd.img \
+—command-line=“root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.img \
+ip=dhcp nameserver=8.8.8.8 rd.writable.fsimg rd.info rd.shell”
+kexec -e
+</code></pre>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/squashible">squashible</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
