@@ -70,3 +70,24 @@ Here are some examples for booting the image once you've generated one:
     —command-line=“root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.img \
     ip=dhcp nameserver=8.8.8.8 rd.writable.fsimg rd.info rd.shell”
     kexec -e
+
+### Logging into the image
+
+You can use the user live and the password live from the console.  The user is disabled from remote ssh access.  If you want to log in remotely, be sure to set a
+public ssh key in group_vars/all.
+
+### Known Issues
+
+OpenSUSE currently has issues booting due to the DHCP daemon it uses.
+
+### Test using iPXE Squashible Boot Images
+These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.
+
+| Type | Bootloader | Description |
+|------|------------|-------------|
+|ISO| [boot.squashible.com.iso](http://boot.squashible.com/ipxe/boot.squashible.com.iso)| Used for CD/DVD, Virtual CDs like DRAC/iLO, VMware, Virtual Box|
+|USB| [boot.squashible.com.usb](http://boot.squashible.com/ipxe/boot.squashible.com.usb)| Used for creation of USB Keys|
+|Kernel| [boot.squashible.com.lkrn](http://boot.squashible.com/ipxe/boot.squashible.com.lkrn)| Used for booting from GRUB/EXTLINUX|
+|DHCP| [boot.squashible.com.kpxe](http://boot.squashible.com/ipxe/boot.squashible.com.kpxe)| DHCP boot image file, uses built-in iPXE NIC drivers|
+|DHCP-undionly | [boot.squashible.com-undionly.kpxe](http://boot.squashible.com/ipxe/boot.squashible.com-undionly.kpxe)| DHCP boot image file, use if you have NIC issues|
+
