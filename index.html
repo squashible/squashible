@@ -144,6 +144,59 @@ imgargs vmlinuz root=live:http://$deployment_server/images/fedora-23-kvm/rootfs.
 ip=dhcp nameserver=8.8.8.8 rd.writable.fsimg rd.info rd.shell”
 kexec -e
 </code></pre>
+
+<h3>
+<a id="logging-into-the-image" class="anchor" href="#logging-into-the-image" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logging into the image</h3>
+
+<p>You can use the user live and the password live from the console.  The user is disabled from remote ssh access.  If you want to log in remotely, be sure to set a
+public ssh key in group_vars/all.</p>
+
+<h3>
+<a id="known-issues" class="anchor" href="#known-issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Known Issues</h3>
+
+<p>OpenSUSE currently has issues booting due to the DHCP daemon it uses.</p>
+
+<h3>
+<a id="test-using-ipxe-squashible-boot-images" class="anchor" href="#test-using-ipxe-squashible-boot-images" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Test using iPXE Squashible Boot Images</h3>
+
+<p>These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.</p>
+
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Bootloader</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO</td>
+<td><a href="http://boot.squashible.com/ipxe/boot.squashible.com.iso">boot.squashible.com.iso</a></td>
+<td>Used for CD/DVD, Virtual CDs like DRAC/iLO, VMware, Virtual Box</td>
+</tr>
+<tr>
+<td>USB</td>
+<td><a href="http://boot.squashible.com/ipxe/boot.squashible.com.usb">boot.squashible.com.usb</a></td>
+<td>Used for creation of USB Keys</td>
+</tr>
+<tr>
+<td>Kernel</td>
+<td><a href="http://boot.squashible.com/ipxe/boot.squashible.com.lkrn">boot.squashible.com.lkrn</a></td>
+<td>Used for booting from GRUB/EXTLINUX</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td><a href="http://boot.squashible.com/ipxe/boot.squashible.com.kpxe">boot.squashible.com.kpxe</a></td>
+<td>DHCP boot image file, uses built-in iPXE NIC drivers</td>
+</tr>
+<tr>
+<td>DHCP-undionly</td>
+<td><a href="http://boot.squashible.com/ipxe/boot.squashible.com-undionly.kpxe">boot.squashible.com-undionly.kpxe</a></td>
+<td>DHCP boot image file, use if you have NIC issues</td>
+</tr>
+</tbody>
+</table>
       </section>
     </div>
     <footer>
