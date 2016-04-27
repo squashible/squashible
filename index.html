@@ -159,7 +159,8 @@ public ssh key in group_vars/all.</p>
 <h3>
 <a id="test-using-ipxe-squashible-boot-images" class="anchor" href="#test-using-ipxe-squashible-boot-images" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Test using iPXE Squashible Boot Images</h3>
 
-<p>These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.</p>
+<p>These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.  Make sure you
+assign 4GB to 8GB of RAM for the images to load properly.  If you run into any errors or kernel panics, usually the cause is not enough memory being available.</p>
 
 <table>
 <thead>
@@ -197,6 +198,11 @@ public ssh key in group_vars/all.</p>
 </tr>
 </tbody>
 </table>
+
+<p>You can also chainload into boot.squashible.com if you already have <a href="http://netboot.xyz">netboot.xyz</a>:</p>
+
+<pre><code>chain --autofree http://boot.squashible.com
+</code></pre>
       </section>
     </div>
     <footer>
