@@ -81,7 +81,9 @@ public ssh key in group_vars/all.
 OpenSUSE currently has issues booting due to the DHCP daemon it uses.
 
 ### Test using iPXE Squashible Boot Images
-These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.
+
+These iPXE disks will automatically load into boot.squashible.com.  These contain live images that have been generated for demonstration puposes.  Make sure you
+assign 4GB to 8GB of RAM for the images to load properly.  If you run into any errors or kernel panics, usually the cause is not enough memory being available.
 
 | Type | Bootloader | Description |
 |------|------------|-------------|
@@ -90,4 +92,9 @@ These iPXE disks will automatically load into boot.squashible.com.  These contai
 |Kernel| [boot.squashible.com.lkrn](http://boot.squashible.com/ipxe/boot.squashible.com.lkrn)| Used for booting from GRUB/EXTLINUX|
 |DHCP| [boot.squashible.com.kpxe](http://boot.squashible.com/ipxe/boot.squashible.com.kpxe)| DHCP boot image file, uses built-in iPXE NIC drivers|
 |DHCP-undionly | [boot.squashible.com-undionly.kpxe](http://boot.squashible.com/ipxe/boot.squashible.com-undionly.kpxe)| DHCP boot image file, use if you have NIC issues|
+
+You can also chainload into boot.squashible.com if you already have [netboot.xyz](http://netboot.xyz):
+
+    chain --autofree http://boot.squashible.com
+
 
