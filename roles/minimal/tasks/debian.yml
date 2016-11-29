@@ -12,11 +12,11 @@
     with_items:
       - "{{ minimal_packages }}"
 
-  - name: Install SELinux packages
-    apt: pkg={{item}} state=latest
-    with_items:
-      - "{{ selinux_packages }}"
-    when: selinux_enabled
+#  - name: Install SELinux packages
+#    apt: pkg={{item}} state=latest
+#    with_items:
+#      - "{{ selinux_packages }}"
+#    when: selinux_enabled
 
   - name: Remove hostname file, let live-config take care of it
     file: path=/etc/hostname state=absent
