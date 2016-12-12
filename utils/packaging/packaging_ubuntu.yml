@@ -3,6 +3,8 @@
   - name: Create temporary mount point
     file: dest=temp state=directory
 
+  - shell: "umount {{ chrootpath }}/dev"
+  - shell: "umount {{ chrootpath }}/proc"
   - shell: "mount"
   - shell: "df"
   - shell: "fallocate -l {{ rootfs_size }} rootfs.img"
@@ -13,7 +15,6 @@
   - shell: "tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img"
   - shell: "mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img"
   - shell: "rm rootfs.img"
-
 
   - name: Remove temporary directory
     file: dest=temp state=absent
