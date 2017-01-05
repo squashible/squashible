@@ -27,7 +27,7 @@ supported_builder_os:
 supported_live_os:
   - centos_7
   - debian_8
-  - fedora_23
+  - fedora_25
   - opensuse_42.1
   - ubuntu_16.04
   - xenserver_6
