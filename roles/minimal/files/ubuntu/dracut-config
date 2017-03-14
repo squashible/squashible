@@ -1,6 +1,6 @@
 # Added to enable live booting for wisp
 
-add_dracutmodules+="livenet nfs network base"
+add_dracutmodules+="livenet nfs network base systemd"
 install_items+="rsync df ctorrent"
 
 show_modules=yes
