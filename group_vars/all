@@ -40,9 +40,13 @@ builder_required_packages:
     - python-docker-py
     - uuid
   Debian:
+    - apt-transport-https
+    - ca-certificates
+    - curl
     - docker.io
     - mktorrent
 #    - python-docker
+    - software-properties-common
     - uuid
   Suse:
     - docker
