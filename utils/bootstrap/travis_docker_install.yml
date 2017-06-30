@@ -1,12 +1,12 @@
 ---
 - name: Add the docker apt signing key
   apt_key:
-    keyserver: 'pool.sks-keyservers.net'
-    id: '58118E89F3A912897C070ADBF76221572C52609D'
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    state: present
 
 - name: Add the official docker repo
   apt_repository:
-    repo: 'deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main'
+    repo: 'deb https://download.docker.com/linux/ubuntu trusty/stable amd64 Packages'
     state: 'present'
 
 - name: Refresh apt cache
@@ -15,7 +15,7 @@
 
 - name: Install docker
   apt:
-    name: 'docker-engine'
+    name: 'docker-ce'
     state: 'latest'
 
 - name: Start the docker service
