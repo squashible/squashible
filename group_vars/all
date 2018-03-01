@@ -43,7 +43,7 @@ builder_required_packages:
     - apt-transport-https
     - ca-certificates
     - curl
-    - docker.io
+#    - docker.io
     - mktorrent
 #    - python-docker
     - software-properties-common
