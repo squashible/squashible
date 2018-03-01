@@ -9,14 +9,12 @@
   - shell: "lsof {{ chrootpath }}/proc"
   - shell: "umount -l {{ chrootpath }}/proc"
   - shell: "fallocate -l {{ rootfs_size }} rootfs.img"
-  - shell: "mkfs.ext4 -F rootfs.img"
+  - shell: "mkfs.ext3 -F rootfs.img"
   - shell: "mount -t ext4 rootfs.img temp"
   - shell: "rsync -a --xattrs {{ chrootpath }}/ temp/"
   - shell: "umount temp"
-#  - shell: "tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img"
-#  - shell: "mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img"
-  - shell: "gzip rootfs.img"
-  - shell: "mv rootfs.img.gz {{ outputpath }}/rootfs.img"
+  - shell: "tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img"
+  - shell: "mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img"
   - shell: "rm rootfs.img"
 
   - name: Remove temporary directory
