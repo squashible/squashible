@@ -15,11 +15,11 @@
     file: path={{chrootpath}}/Dockerfile state=absent
 
   - name: Run docker container to create bootstrapped chroot
-    docker: >
-        image=squashible-{{ansible_run_uuid}}
-        name=squashible-{{ansible_run_uuid}}
-        hostname=squashible-{{ansible_run_uuid}}
-        privileged=True
+    docker_container:
+      image: "squashible-{{ansible_run_uuid}}"
+      name: "squashible-{{ansible_run_uuid}}"
+      hostname: "squashible-{{ansible_run_uuid}}"
+      privileged: yes
 
   - name: Get pid of docker container we just started
     script: utils/bootstrap/get_docker_pid.sh squashible-{{ansible_run_uuid}}
