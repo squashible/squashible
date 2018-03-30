@@ -32,15 +32,15 @@
     shell: docker cp squashible-{{ansible_run_uuid}}:/tmp/bootstrap/ {{ chrootpath }}
 
   - name: Destroy docker container
-    docker: >
-        image=squashible-{{ansible_run_uuid}}
-        name=squashible-{{ansible_run_uuid}}
-        state=absent
+    docker_container:
+      image: "squashible-{{ansible_run_uuid}}"
+      name: "squashible-{{ansible_run_uuid}}"
+      state: absent
 
   - name: Destroy docker image
-    docker_image: >
-        name=squashible-{{ansible_run_uuid}}
-        state=absent
+    docker_image:
+      name: "squashible-{{ansible_run_uuid}}"
+      state: absent
 
   - name: Move the docker filesystem into the root of the chroot path
     shell: mv {{chrootpath}}/bootstrap/* {{chrootpath}}
