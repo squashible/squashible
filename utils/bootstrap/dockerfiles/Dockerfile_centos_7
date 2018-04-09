@@ -1,5 +1,5 @@
 FROM centos:centos7
-MAINTAINER Major Hayden <major.hayden@rackspace.com>
+MAINTAINER Antony Messerli <antony@mes.ser.li>
 
 # Add a directory to hold our chroot
 RUN mkdir /tmp/bootstrap

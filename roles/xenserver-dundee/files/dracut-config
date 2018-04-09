@@ -1,7 +1,0 @@
-# Added to enable live booting for wisp
-
-add_dracutmodules+="livenet network base"
-install_items+="rsync df ctorrent"
-
-show_modules=yes
-hostonly="no"

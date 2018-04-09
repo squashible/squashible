@@ -17,7 +17,7 @@ selinux_enabled: yes
 # you've written the necessary playbooks, tasks and variables to support new
 # operating systems as builders.
 supported_builder_os:
-  - fedora_23
+  - fedora_27
   - ubuntu_14
   - ubuntu_16
 
@@ -26,11 +26,11 @@ supported_builder_os:
 # as live operating systems.
 supported_live_os:
   - centos_7
-  - debian_8
-  - fedora_25
-  - opensuse_42.1
+  - debian_9
+  - fedora_27
+  - opensuse_42.3
   - ubuntu_16.04
-  - xenserver_6
+  - ubuntu_18.04
 
 # Builder systems must have these packages installed.
 builder_required_packages:

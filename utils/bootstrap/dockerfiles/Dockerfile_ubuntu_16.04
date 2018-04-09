@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Antony Messerli <amesserl@rackspace.com>
+MAINTAINER Antony Messerli <antony@mes.ser.li>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
