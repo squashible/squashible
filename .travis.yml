@@ -13,7 +13,7 @@ before_install:
 
 install:
  - sudo pip install ansible
- - sudo pip install docker-py
+ - sudo pip install docker
 
 script:
  - sudo ./run_squashible.sh
