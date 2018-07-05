@@ -13,9 +13,14 @@
   apt:
     update_cache: true
 
-- name: Install docker
+- name: Install docker package
   apt:
     name: 'docker-ce'
+    state: 'latest'
+
+- name: Install docker module
+  pip:
+    name: 'docker'
     state: 'latest'
 
 - name: Start the docker service
