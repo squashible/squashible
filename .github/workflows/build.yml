@@ -11,4 +11,4 @@ jobs:
         sudo apt-get update -qq
         sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl btrfs-tools
         sudo pip install ansible docker PyYAML
-        sudo ./run_squashible.sh -e 'live_os=ubuntu_18.04'
+        ansible-playbook -i hosts_generator.py squashible.yml -e "live_os=ubuntu_18.04"
