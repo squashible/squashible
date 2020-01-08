@@ -17,18 +17,18 @@ selinux_enabled: yes
 # you've written the necessary playbooks, tasks and variables to support new
 # operating systems as builders.
 supported_builder_os:
-  - fedora_27
-  - ubuntu_14
+  - fedora_31
   - ubuntu_16
+  - ubuntu_18
 
 # Supported live operating systems.  Add to this list once you've written the
 # necessary playbooks, tasks and variables to support new operating systems 
 # as live operating systems.
 supported_live_os:
-  - centos_7
-  - debian_9
-  - fedora_27
-  - opensuse_42.3
+  - centos_8
+  - debian_10
+  - fedora_31
+  - opensuse_15.1
   - ubuntu_16.04
   - ubuntu_18.04
 
@@ -63,4 +63,4 @@ openstack_nova_branch: master
 rootfs_size: 3G
 
 # specify torrent announce url (if not set, skips torrent generator)
-torrent_announce_url: http://tracker.squashible.com:6969/announce
+torrent_announce_url:
