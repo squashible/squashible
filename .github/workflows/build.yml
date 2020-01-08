@@ -12,4 +12,4 @@ jobs:
         sudo apt-get install -qq squashfs-tools uuid python-apt python-pycurl btrfs-tools
         sudo pip install ansible
         sudo pip install docker
-        sudo ./run_squashible.sh
+        sudo ./run_squashible.sh -e 'live_os=ubuntu_18.04'

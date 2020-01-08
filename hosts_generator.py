@@ -14,7 +14,7 @@ import yaml
 
 # Pick up our group_vars file
 stream = open("group_vars/all", 'r')
-vars = yaml.load(stream)
+vars = yaml.load(stream, Loader=yaml.FullLoader)
 
 
 hosts = {
