@@ -2,6 +2,8 @@
 
   - name: Clean up yum cache
     command: "{{ ansible_pkg_mgr }} clean all"
+    args:
+      warn: no
 
   - name: Really clean yum cache
     shell: for i in `ls /var/lib/{{ ansible_pkg_mgr }}/`; do rm -rfv /var/lib/{{ ansible_pkg_mgr }}/${i}/*; done

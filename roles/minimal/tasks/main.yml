@@ -4,21 +4,21 @@
     include_vars: "{{ ansible_distribution }}_{{ ansible_architecture }}.yml"
 
   - name: Set /etc/resolv.conf
-    lineinfile: >
-        dest=/etc/resolv.conf
-        line="{{item}}"
-        create=yes
+    lineinfile:
+      dest: /etc/resolv.conf
+      line: "{{ item }}"
+      create: yes
+      mode: 0644
     with_items:
       - 'nameserver 8.8.8.8'
       - 'nameserver 8.8.4.4'
 
-  # NOTE(major): Ansible will complain and refuse to mount any filesystems if
-  # there's no /etc/fstab in place.
   - name: Create /etc/fstab
-    lineinfile: >
-        dest=/etc/fstab
-        line="# Added by squashible"
-        create=yes
+    lineinfile:
+      dest: /etc/fstab
+      line: "# Added by squashible"
+      create: yes
+      mode: 0644
 
   - include: mounts.yml
 
@@ -32,6 +32,6 @@
 
   - include: opensuse.yml
     when: ansible_os_family == "Suse"
- 
+
   - include: ubuntu.yml
     when: ansible_distribution == "Ubuntu"

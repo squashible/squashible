@@ -5,27 +5,27 @@
     register: ansible_run_uuid
 
   - name: Set uuid fact
-    set_fact: >
-      ansible_run_uuid={{ansible_run_uuid.stdout}}
+    set_fact:      
+      ansible_run_uuid: "{{ ansible_run_uuid.stdout }}"
 
   - name: Unmount filesystems left over from a failed build
-    mount: >
-      name={{chrootpath}}/{{item.dest}}
-      src={{item.src}}
-      fstype={{item.fstype}}
-      state=unmounted
+    mount:
+      path: "{{ item }}"
+      state: "unmounted"
     with_items:
-      - { fstype: "proc",       src: "none",        dest: "proc" }
-      - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "sys/fs/selinux" }
-      - { fstype: "none",       src: "none",        dest: "dev" }
-
+    - "{{ chrootpath }}/proc"
+    - "{{ chrootpath }}/sys/fs/selinux"
+    - "{{ chrootpath }}/dev/pts"
+    - "{{ chrootpath }}/dev"
+    - "rootfs.img"
+      
   - name: Clean up the chroot path
-    file: >
-      path={{chrootpath}}
-      state={{item}}
-      owner=root
-      group=root
-      mode=0755
+    file:
+      path: "{{ chrootpath }}"
+      state: "{{ item }}"
+      owner: "root"
+      group: "root"
+      mode: "0755"
     with_items:
       - absent
       - directory

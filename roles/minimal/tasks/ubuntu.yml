@@ -19,49 +19,52 @@
     apt: update_cache=yes upgrade=dist
 
   - name: Install minimal packages
-    apt: pkg={{item}} state=latest force=yes
-    with_items:
-      - "{{ minimal_packages }}"
+    apt:
+      pkg: "{{ minimal_packages }}"
+      state: present
+      force: yes
 
   - name: Add support for DNS resolution in initramfs
-    lineinfile: >
-      dest=/etc/live/boot.conf
-      line="LIVE_DNS=true"
-      create=yes
-      state=present
+    lineinfile:
+      dest: /etc/live/boot.conf
+      line: "LIVE_DNS=true"
+      create: yes
+      state: present
+      mode: 0644
 
   - name: Remove hostname file, let live-config take care of it
-    file: path=/etc/hostname state=absent
+    file:
+      path: /etc/hostname
+      state: absent
 
   - name: Install the kernel and regenerate initramfs
-    apt: pkg=linux-generic state=latest
+    apt:
+     pkg: linux-generic
+     state: present
 
   - name: Don't let live-config disable ssh password authentication
-    lineinfile: dest=/lib/live/config/1160-openssh-server
-        regexp="PasswordAuthentication"
-        state=absent
+    lineinfile:
+      dest: /lib/live/config/1160-openssh-server
+      regexp: "PasswordAuthentication"
+      state: absent
 
   - name: Add live user (for testing)
-    user: name=live shell=/bin/bash groups=sudo append=yes
-      password="$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
+    user:
+      name: live
+      shell: /bin/bash
+      groups: sudo
+      append: yes
+      password: "$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
 
   - name: Deny live user from ssh, only allow via console
-    lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
+    lineinfile:
+      dest: /etc/ssh/sshd_config
+      line: "DenyUsers live"
 
   - name: Add dracut config to enable livenet module
-    copy: src=ubuntu/dracut-config dest=/etc/dracut.conf
-      owner=root group=root mode=0644
-
-  - name: Copy test livenet patches for bugzilla #1280103
     copy:
-      src: ubuntu/dracut/livenet-generator.sh
-      dest: /usr/lib/dracut/modules.d/90livenet/livenet-generator.sh
-      mode: 0755
-    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
-
-  - name: Copy test livenet patches for bugzilla #1280103
-    copy:
-      src: ubuntu/dracut/module-setup.sh
-      dest: /usr/lib/dracut/modules.d/90livenet/module-setup.sh
-      mode: 0755
-    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
+      src: ubuntu/dracut-config
+      dest: /etc/dracut.conf
+      owner: root
+      group: root
+      mode: 0644

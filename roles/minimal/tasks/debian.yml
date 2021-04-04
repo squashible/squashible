@@ -1,50 +1,45 @@
 ---
 
   - name: Disable daemon startup with policy-rc.d file
-    copy: src=debian/usr-sbin-policy-rc.d dest=/usr/sbin/policy-rc.d
-      owner=root group=root mode=0755
+    copy: 
+      src: debian/usr-sbin-policy-rc.d 
+      dest: /usr/sbin/policy-rc.d
+      owner: root
+      group: root
+      mode: 0755
 
-  - name: Upgrade all packages in chroot
-    apt: update_cache=yes upgrade=dist
-
-  - name: Install minimal packages
-    apt: pkg={{item}} state=latest force=yes
-    with_items:
-      - "{{ minimal_packages }}"
-
-#  - name: Install SELinux packages
-#    apt: pkg={{item}} state=latest
-#    with_items:
-#      - "{{ selinux_packages }}"
-#    when: selinux_enabled
+  - name: Install minimum package set
+    package:
+      name: "{{ minimal_packages }}"
+      state: present
 
   - name: Remove hostname file, let live-config take care of it
-    file: path=/etc/hostname state=absent
+    file:
+      path: /etc/hostname
+      state: absent
 
   - name: Install the kernel and regenerate initramfs
-    apt: pkg=linux-image-amd64 state=latest
+    apt:
+      pkg: linux-image-amd64
+      state: present
 
   - name: Add live user (for testing)
-    user: name=live shell=/bin/bash groups=sudo append=yes
-      password="$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
+    user: 
+      name: live
+      shell: /bin/bash
+      groups: sudo
+      append: yes
+      password: "$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
 
   - name: Deny live user from ssh, only allow via console
-    lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
+    lineinfile:
+      dest: /etc/ssh/sshd_config
+      line: "DenyUsers live"
 
   - name: Add dracut config to enable livenet module
-    copy: src=debian/dracut-config dest=/etc/dracut.conf
-      owner=root group=root mode=0644
-
-  - name: Copy test livenet patches for bugzilla #1280103
-    copy:
-      src: debian/dracut/livenet-generator.sh
-      dest: /usr/lib/dracut/modules.d/90livenet/livenet-generator.sh
-      mode: 0755
-    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
-
-  - name: Copy test livenet patches for bugzilla #1280103
-    copy:
-      src: debian/dracut/module-setup.sh
-      dest: /usr/lib/dracut/modules.d/90livenet/module-setup.sh
-      mode: 0755
-    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == "15.10"
+    copy: 
+      src: debian/dracut-config
+      dest: /etc/dracut.conf
+      owner: root
+      group: root
+      mode: 0644

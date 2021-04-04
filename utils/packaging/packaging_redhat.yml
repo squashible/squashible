@@ -5,6 +5,8 @@
 
   - name: Prepare a sparse file
     shell: "{{ item }}"
+    args:
+      warn: no
     with_items:
       - umount {{ chrootpath }}/dev
       - umount -l {{ chrootpath }}/proc

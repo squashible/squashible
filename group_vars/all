@@ -7,7 +7,7 @@ outputpath: live_output
 
 # Which live OS should be build?  Refer to "supported_live_os" variable below
 # for supported OS versions.
-live_os:
+live_os: fedora_33
 
 # Should we build live environments with SELinux enabled and proper contexts
 # applied?
@@ -17,9 +17,9 @@ selinux_enabled: yes
 # you've written the necessary playbooks, tasks and variables to support new
 # operating systems as builders.
 supported_builder_os:
-  - fedora_31
-  - ubuntu_16
+  - fedora_33
   - ubuntu_18
+  - ubuntu_20
 
 # Supported live operating systems.  Add to this list once you've written the
 # necessary playbooks, tasks and variables to support new operating systems 
@@ -27,15 +27,13 @@ supported_builder_os:
 supported_live_os:
   - centos_8
   - debian_10
-  - fedora_31
+  - fedora_33
   - opensuse_15.1
-  - ubuntu_16.04
-  - ubuntu_18.04
+  - ubuntu_20.04
 
 # Builder systems must have these packages installed.
 builder_required_packages:
   RedHat:
-    - btrfs-progs
     - docker-io
     - python-docker-py
     - uuid
@@ -60,7 +58,4 @@ user_ssh_keys:
 openstack_nova_branch: master
 
 # specify size of rootfs.img (1G, 6G, etc...)
-rootfs_size: 3G
-
-# specify torrent announce url (if not set, skips torrent generator)
-torrent_announce_url:
+rootfs_size: 4G

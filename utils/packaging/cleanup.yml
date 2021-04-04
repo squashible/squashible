@@ -14,12 +14,10 @@
 
   - name: Unmount filesystems left over from a failed build
     mount:
-      name: "{{item.dest}}"
-      src: "{{item.src}}"
-      fstype: "{{item.fstype}}"
+      path: "{{ item }}"
       state: "unmounted"
     with_items:
-    - { fstype: "proc",       src: "none",        dest: "{{ chrootpath }}/proc" }
-    - { fstype: "selinuxfs",  src: "selinuxfs",   dest: "{{ chrootpath }}/sys/fs/selinux" }
-    - { fstype: "dev/pts",    src: "none",        dest: "{{ chrootpath }}/dev/pts" }
-    - { fstype: "dev",        src: "none",        dest: "{{ chrootpath }}/dev" }
+    - "{{ chrootpath }}/proc"
+    - "{{ chrootpath }}/sys/fs/selinux"
+    - "{{ chrootpath }}/dev/pts"
+    - "{{ chrootpath }}/dev"

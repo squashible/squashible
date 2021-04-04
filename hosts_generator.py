@@ -1,12 +1,5 @@
-#!/usr/bin/env python
-#
-# This file is downright hideous but it pulls our chroot path from the vars
-# file so that users only have to make configuration adjustments in that
-# single file.
-#
-# Many thanks to the rax.py ansible inventory plugin and @vincentvdk's LDAP
-# ansible inventory plugin for the inspiration.
-#
+#!/usr/bin/env python3
+
 import argparse
 import json
 import sys
@@ -14,7 +7,7 @@ import yaml
 
 # Pick up our group_vars file
 stream = open("group_vars/all", 'r')
-vars = yaml.load(stream)
+vars = yaml.load(stream, Loader=yaml.FullLoader)
 
 
 hosts = {

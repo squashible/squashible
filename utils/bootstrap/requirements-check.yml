@@ -10,19 +10,15 @@
         - "'{{live_os}}' in supported_live_os"
 
   - name: Install packages on builder node (Red Hat)
-    dnf: >
-      pkg={{item}}
-      state=present
-    with_items:
-      - "{{builder_required_packages[ansible_os_family]}}"
+    dnf:
+      pkg: ['{{builder_required_packages[ansible_os_family]}}']
+      state: present
     when: ansible_os_family == "RedHat"
 
   - name: Install packages on builder node (Debian)
-    apt: >
-      pkg={{item}}
-      state=present
-    with_items:
-      - "{{builder_required_packages[ansible_os_family]}}"
+    apt:
+      pkg: "{{builder_required_packages[ansible_os_family]}}"
+      state: present
     when: ansible_os_family == "Debian"
     ignore_errors: true
 
@@ -30,11 +26,9 @@
     when: ansible_os_family == "Debian"
 
   - name: Install packages on builder node (Suse)
-    zypper: >
-      pkg={{item}}
-      state=present
-    with_items:
-      - "{{builder_required_packages[ansible_os_family]}}"
+    zypper:
+      pkg: ['{{builder_required_packages[ansible_os_family]}}']
+      state: present
     when: ansible_os_family == "Suse"
 
   # NOTE(major): Docker on Fedora/CentOS 7 uses socket activation with systemd,

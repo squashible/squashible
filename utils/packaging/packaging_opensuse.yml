@@ -5,6 +5,8 @@
 
   - name: Prepare a sparse file
     shell: "{{ item }}"
+    args:
+      warn: no
     with_items:
       - fallocate -l {{ rootfs_size }} rootfs.img
       - mkfs.ext4 -F rootfs.img

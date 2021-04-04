@@ -1,7 +1,7 @@
 ---
 
   - name: Upgrade and install minimum package set
-    shell: "{{item}}"
+    shell: "{{ item }}"
     with_items:
       - zypper -n update
       - zypper -n install {{ minimal_packages | join (" ") }}
@@ -21,29 +21,44 @@
     shell: rsync -av /etc/skel/ /root/
 
   - name: Store journald logs only in RAM
-    lineinfile: dest=/etc/systemd/journald.conf line="Storage=volatile" state=present
+    lineinfile: 
+      dest: /etc/systemd/journald.conf
+      line: "Storage=volatile"
+      state: present
 
   - name: Add live user (for testing)
-    user: name=live shell=/bin/bash groups=wheel append=yes
-      password="$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
+    user: 
+      name: live
+      shell: /bin/bash
+      groups: wheel
+      append: yes
+      password: "$6$uf0amHdCN0H8PwWk$zKoAF4khAjunE/pnq0Q4iMU69t7gj2mvaKku3YE5k3/bVl.H9DcwOnlqBY23yTTcidp2CjknV38rgSro62vpC/"
 
   - name: Deny live user from ssh, only allow via console
-    lineinfile: dest=/etc/ssh/sshd_config line="DenyUsers live"
+    lineinfile: 
+      dest: /etc/ssh/sshd_config
+      line: "DenyUsers live"
 
   - name: Enable logrotate compression
-    lineinfile: dest=/etc/logrotate.conf
-        regexp="^compress"
-        insertafter="^#compress"
-        line="compress"
-        state=present
+    lineinfile:
+      dest: /etc/logrotate.conf
+      regexp: "^compress"
+      insertafter: "^#compress"
+      line: "compress"
+      state: present
 
   - name: Enable daily log rotation
-    lineinfile: dest=/etc/logrotate.conf
-        regexp="^weekly"
-        line="daily"
-        backrefs=yes
-        state=present
+    lineinfile: 
+      dest: /etc/logrotate.conf
+      regexp: "^weekly"
+      line: "daily"
+      backrefs: yes
+      state: present
 
   - name: Add dracut config to enable livenet module
-    copy: src=opensuse/dracut-config dest=/etc/dracut.conf
-      owner=root group=root mode=0644
+    copy:
+      src: opensuse/dracut-config
+      dest: /etc/dracut.conf
+      owner: root
+      group: root
+      mode: 0644

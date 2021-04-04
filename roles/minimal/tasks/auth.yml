@@ -1,12 +1,12 @@
 ---
   - name: Create .ssh directory
-    file: 
+    file:
       path: /root/.ssh
       state: directory
-      mode: 0755 
+      mode: 0755
 
   - name: Inject authorized_keys file
     template:
       src: authorized_keys.j2
       dest: /root/.ssh/authorized_keys
-
+      mode: 0755

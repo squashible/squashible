@@ -37,10 +37,10 @@
         dest: "{{ chrootpath }}/etc/resolv.conf"
         line: "{{ item }}"
         create: yes
+        mode: 666
     with_items:
       - 'nameserver 8.8.8.8'
       - 'nameserver 8.8.4.4'
-
   - include: packaging_debian.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Debian"
 
@@ -52,6 +52,3 @@
 
   - include: packaging_ubuntu.yml
     when: hostvars[chrootpath]['ansible_distribution'] == "Ubuntu"
-
-  - include: packaging_torrent.yml
-    when: torrent_announce_url is defined

@@ -3,19 +3,21 @@
   - name: Create temporary mount point
     file: dest=temp state=directory
 
-  - shell: "mount"
-  - shell: "df"
-  - shell: "umount {{ chrootpath }}/dev"
-  - shell: "lsof {{ chrootpath }}/proc"
-  - shell: "umount -l {{ chrootpath }}/proc"
-  - shell: "fallocate -l {{ rootfs_size }} rootfs.img"
-  - shell: "mkfs.ext4 -F rootfs.img"
-  - shell: "mount -t ext4 rootfs.img temp"
-  - shell: "rsync -a --xattrs {{ chrootpath }}/ temp/"
-  - shell: "umount temp"
-  - shell: "tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img"
-  - shell: "mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img"
-  - shell: "rm rootfs.img"
+  - name: Prepare a sparse file
+    shell: "{{ item }}"
+    args:
+      warn: no
+    with_items:
+      - umount {{ chrootpath }}/dev
+      - umount -l {{ chrootpath }}/proc
+      - fallocate -l {{ rootfs_size }} rootfs.img
+      - mkfs.ext4 -F rootfs.img
+      - mount -t ext4 rootfs.img temp
+      - rsync -a --xattrs {{ chrootpath }}/ temp/
+      - umount temp
+      - tar czf {{ outputpath }}/rootfs.img.tgz rootfs.img
+      - mv {{ outputpath }}/rootfs.img.tgz {{ outputpath }}/rootfs.img
+      - rm rootfs.img
 
   - name: Remove temporary directory
     file: dest=temp state=absent

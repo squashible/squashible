@@ -1,15 +1,17 @@
 ---
 
   - name: Copy Dockerfile into chroot path temporarily
-    copy: >
-        src=utils/bootstrap/dockerfiles/Dockerfile_{{ live_os }}
-        dest={{ chrootpath }}/Dockerfile
+    copy:
+      src: "utils/bootstrap/dockerfiles/Dockerfile_{{ live_os }}"
+      dest: "{{ chrootpath }}/Dockerfile"
 
   - name: Build a docker image based on our Dockerfile
-    docker_image: >
-        path={{ chrootpath }}
-        name=squashible-{{ansible_run_uuid}}
-        state=present
+    docker_image:
+      build:
+        path: "{{ chrootpath }}"
+      name: "squashible-{{ansible_run_uuid}}"
+      source: build
+      state: present
 
   - name: Remove the Dockerfile
     file: path={{chrootpath}}/Dockerfile state=absent
@@ -19,6 +21,7 @@
       image: "squashible-{{ansible_run_uuid}}"
       name: "squashible-{{ansible_run_uuid}}"
       hostname: "squashible-{{ansible_run_uuid}}"
+      container_default_behavior: no_defaults
       privileged: yes
 
   - name: Get pid of docker container we just started

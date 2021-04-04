@@ -5,7 +5,11 @@
 
   - name: Prepare a sparse file
     shell: "{{ item }}"
+    args:
+      warn: no
     with_items:
+      - umount {{ chrootpath }}/dev
+      - umount -l {{ chrootpath }}/proc
       - fallocate -l {{ rootfs_size }} rootfs.img
       - mkfs.ext4 -F rootfs.img
       - mount -t ext4 rootfs.img temp
